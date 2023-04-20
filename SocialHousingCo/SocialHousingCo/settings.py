@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'SocialHousingCo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql.psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'userdb',
         'USER': 'postgres',
         'PASSWORD': 'SCCT1223',
