@@ -79,16 +79,8 @@ WSGI_APPLICATION = 'SocialHousingCo.wsgi.application'
 
 DATABASES = {
     'default': {
-<<<<<<< HEAD
-
-                'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-  
-
-=======
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
->>>>>>> ce82b8579e2d803d231cfe583ed06ab5b52d5986
     }
 }
 
