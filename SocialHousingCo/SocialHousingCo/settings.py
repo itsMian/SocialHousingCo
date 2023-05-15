@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'Listpage',
     'bootstrap5',
     'Database',
+    'Login',
+    'Createaccount',
 ]
 
 MIDDLEWARE = [
