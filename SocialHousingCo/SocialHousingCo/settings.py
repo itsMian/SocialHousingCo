@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Database',
     'Login',
     'Createaccount',
+    'Userprofile',
 ]
 
 MIDDLEWARE = [
