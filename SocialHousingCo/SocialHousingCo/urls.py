@@ -25,5 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('myproperty/', views.showproperty),
     path('login/', include("Login.urls")),
-     path('createaccount/', include("Createaccount.urls")),
+    path('createaccount/', include("Createaccount.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
