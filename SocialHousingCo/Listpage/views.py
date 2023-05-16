@@ -75,5 +75,4 @@ def updateProperty(request, *args, **kwargs):
 def deleteProperty(request, *args, **kwargs):
     prop = get_object_or_404(Property, id = kwargs['id'])
     prop.delete()
-    messages.success(request, "Property Delete Successfully")
     return redirect('/listpage/')
