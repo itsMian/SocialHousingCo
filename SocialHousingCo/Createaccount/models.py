@@ -7,3 +7,4 @@ class Accounts(models.Model):
     Email = models.CharField (max_length=50, default ='')
     password = models.CharField (max_length=20, default ='')
     confirmpassword = models.CharField (max_length=20, default ='')
+    
