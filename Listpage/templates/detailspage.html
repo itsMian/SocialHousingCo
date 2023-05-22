@@ -1,0 +1,197 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Details Page {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'map.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body style="background-color: gainsboro; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <div class="container-fluid p-0">
+        <ul class="nav" style="background-color: #80D8FF;">
+            <li class="nav-item align-self-center d-sm-none">
+                <a class="nav-link link-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </a>
+            </li>
+            <li class="nav-item align-self-center">
+                <a class="nav-link link-dark" href="/">
+                    <img src="{% static 'Listpage/images/logo_new.png' %}" alt="LOGO" width="140" height="40.2">
+                </a>
+            </li>
+            <li class="nav-item align-self-center d-none d-sm-block">
+                <a class="nav-link link-dark" href="/">Home</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="/listpage/">List Page</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Features</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Support</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Contact</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto">
+                <a class="nav-link link-dark" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                    </svg>
+                </a>
+            </li>
+            <li class="nav-item align-self-center">
+                <a class="nav-link link-dark" href="/login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-white p-2">
+            <a href="/" class="nav-link link-dark">Home</a>
+            <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
+            <a href="#" class="nav-link link-dark">News</a>
+            <a href="#" class="nav-link link-dark">Features</a>
+            <a href="#" class="nav-link link-dark">Support</a>
+            <a href="#" class="nav-link link-dark">Contact</a>
+        </div>
+    </div>
+
+    <div class="container-fluid px-0 py-2 border border-dark">
+        <a class="ms-3" href="/listpage">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>Back to results</a>
+        <a class="text-right btn btn-white" type="button" href="{% url 'editproperty' property.id %}">Edit</a>
+    </div>
+    <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
+        <div class="container-fluid p-0" style="background-color: white;">
+            <div class="row">
+                <div id="carouselExampleControls" class="carousel slide d-lg-none d-md-none" data-bs-ride="carousel" data-bs-interval="false">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        {% if property.image %}
+                        <img src="{{ property.image.url }}" style="width: 100%;">
+                        {% else %}
+                        <img src="{% static 'Listpage/images/unknown_prop.png' %}" style="width: 100%;">
+                        {% endif %}
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'Listpage/images/sample_house2.jpg' %}" style="width: 100%;">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'Listpage/images/sample_house3.jpg' %}" style="width: 100%;">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'Listpage/images/sample_house4.jpg' %}" style="width: 100%;">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="col-md-4 text-md-center p-5">
+                    <h4>{{property.address}}, {{property.suburb}} {{property.state}}, {{property.postcode}}</h4>
+                    <h5 class="py-2">${{property.price}} per week</h5>
+                    <div>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 640 512"><path d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>   {{property.bedroom}}</span>
+                        <span class="p-4"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512"><path d="M96 77.3c0-7.3 5.9-13.3 13.3-13.3c3.5 0 6.9 1.4 9.4 3.9l14.9 14.9C130 91.8 128 101.7 128 112c0 19.9 7.2 38 19.2 52c-5.3 9.2-4 21.1 3.8 29c9.4 9.4 24.6 9.4 33.9 0L289 89c9.4-9.4 9.4-24.6 0-33.9c-7.9-7.9-19.8-9.1-29-3.8C246 39.2 227.9 32 208 32c-10.3 0-20.2 2-29.2 5.5L163.9 22.6C149.4 8.1 129.7 0 109.3 0C66.6 0 32 34.6 32 77.3V256c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H96V77.3zM32 352v16c0 28.4 12.4 54 32 71.6V480c0 17.7 14.3 32 32 32s32-14.3 32-32V464H384v16c0 17.7 14.3 32 32 32s32-14.3 32-32V439.6c19.6-17.6 32-43.1 32-71.6V352H32z"/></svg>   {{property.bathroom}}</span>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512"><path d="M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>   {{property.parking_space}}</span>
+                    </div>
+                    <p class="py-4">Bonds $6400</p>
+                    <h6>Available Now</h6>
+                </div>
+                <div class="col-md-4 px-1 d-none d-sm-block">
+                    <img src="{% static 'Listpage/images/sample_house.jpg' %}" class="img-fluid" alt="Sample House 1">
+                </div>
+                <div class="col-md-2 d-none d-sm-block">
+                    <div class="row-md-4">
+                        <img src="{% static 'Listpage/images/sample_house2.jpg' %}" style="max-width: 70%;" alt="Sample House 2">
+                    </div>
+                    <div class="row-md-4" style="padding: 4px 0;">
+                        <img src="{% static 'Listpage/images/sample_house3.jpg' %}" style="max-width: 70%;" alt="Sample House 3">
+                    </div>
+                    <div class="row-md-4">
+                        <img src="{% static 'Listpage/images/sample_house4.jpg' %}" style="max-width: 70%;" alt="Sample House 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid py-3">
+            <div id="map"></div>
+            <!-- <div class="my-3 float-md-end">
+                <div class="border border-dark p-3" style="margin: 0 auto;">
+                    <a class="link-dark" href="/listpage"><svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg></a>
+                    <span class="ps-4" style="font-size: 18px;">Lee Chen</span>
+                    <hr class="border border-dark">
+                    <div class="d-grid gap-3 col-6 mx-auto py-3">
+                        <button class="border-0 p-2 bg-danger text-white">Contact me</button>
+                        <button class="border-0 p-2">Apply</button>
+                        <button class="border-0 p-2">Inspections</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="m-auto">
+                <div class="accordion mx-auto" style="max-width: 650px;" id="myAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne">Information</button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show">
+                            <div class="card-body">
+                                <p><b>{{property.title}}</b><br>
+                                    {{property.description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'map.js' %}" defer>
+
+    </script>
+    <script>
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function myFunction() {
+          var x = document.getElementById("navMenu");
+          if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+          } else { 
+            x.className = x.className.replace(" w3-show", "");
+          }
+        }
+        </script>
+</body>
+</html>
