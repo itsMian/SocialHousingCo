@@ -11,7 +11,7 @@ class Property(models.Model):
     suburb = models.CharField(max_length=200, default='')
     state = models.CharField(max_length=200, default='')
     postcode = models.IntegerField(default='0')
-    price = models.IntegerField(default='0')
+    price = models.IntegerField(default=0)
     description = models.TextField(default='Description')
     bedroom = models.IntegerField(default='0')
     bathroom = models.IntegerField(default='0')
