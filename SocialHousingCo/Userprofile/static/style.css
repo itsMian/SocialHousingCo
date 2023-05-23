@@ -138,3 +138,102 @@ body {
     margin-top: 1em; /* Create a space of 1 lines above the title */
 }
 
+
+.sub-header {
+    width: auto;
+    height: 83.0px;
+    font-family: Arial;
+    font-size: 15.0px;
+    font-weight: 400;
+    text-align: center;
+    color: #000000;
+    background-color: #E3E3E3;
+}
+
+.personal-title {
+    width: 80%;
+    height: 40.0px;
+    font-family: Bahnschrift;
+    font-size: 30.0px;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-left: -20%;
+}
+
+input {
+    width: 453px;
+    height: 48px;
+    font-family: 'Roboto-Regular', sans-serif;
+    font-size: 15px;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1.5px solid #E5E5EA;
+    border-radius: 2.25px;
+    padding-right: 35px;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+
+label {
+    width: 87.15625px;
+    height: 18px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.button-container {
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.cancel-btn {
+    width: 210px;
+    height: 32px;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 20px;
+    color: #000000;
+    background-color: #F8F8F8;
+    border: 2px solid #010101;
+    border-radius: 3.6px;
+    
+}
+
+.save-btn {
+    width: 210px;
+    height: 32px;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 20px;
+    color: #FFFFFF;
+    background-color: #F43F47;
+    border: 2px solid #EA4646;
+    border-radius: 3.6px;
+   
+}
+
+
+
+
+#user-introduction {
+    width: 1000px;
+    height: 800px;
+    font-family: Arial;
+    font-size: 15px;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
