@@ -13,3 +13,4 @@ urlpatterns = [
     path("<int:id>/updadeproperty/", views.updateProperty, name="updateproperty"),
     path("<int:id>/deleteproperty/", views.deleteProperty, name="deleteproperty"),
 ]
+
