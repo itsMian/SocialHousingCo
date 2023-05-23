@@ -63,7 +63,8 @@ background-attachment: fixed;
           </div>
           <div class="card-body">
             
-            <form method="POST" action="/login">
+            <form method="POST" action="{% url 'signin' %}">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="Email">Email:</label>
                 <input type="email" id="Email" name="Email" class="form-control" required>
@@ -79,6 +80,8 @@ background-attachment: fixed;
               <a href="/createaccount" class="  btn btn-link ">Create an Account?</a>
             </div>
             </form>
+          
+
           </div>
         </div>
       </div>
