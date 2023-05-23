@@ -30,7 +30,7 @@ def register(request):
     acc.role = request.POST.get('role')
     acc.save()
     messages.success(request, "Account successfully created")
-    return redirect('/login')
+    return redirect('/profiles')
 
 class setupprofile(View):
     def get(self, request, *args, **kwargs):

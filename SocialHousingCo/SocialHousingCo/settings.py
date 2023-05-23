@@ -84,15 +84,27 @@ WSGI_APPLICATION = 'SocialHousingCo.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
+<<<<<<< HEAD
+
+
+
+DATABASES = {
+         'default': {
+=======
 DATABASES = {
     'default': {
+>>>>>>> 8a1249cd389fdb906ac22880e04a4167aadbfe1e
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASS'),
         'HOST': 'localhost',
         'PORT': '5432',
+<<<<<<< HEAD
+}
+=======
     }
+>>>>>>> 8a1249cd389fdb906ac22880e04a4167aadbfe1e
 }
 
 
