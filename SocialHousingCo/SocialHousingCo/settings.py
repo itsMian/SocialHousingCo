@@ -92,6 +92,16 @@ DATABASES = {
          'default': {
 =======
 DATABASES = {
+<<<<<<< HEAD
+'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': env('DATABASE_NAME'),
+    'USER': env('DATABASE_USER'),
+    'PASSWORD': env('DATABASE_PASS'),
+    'HOST': 'localhost',
+    'PORT': '5432',
+}
+=======
     'default': {
 >>>>>>> 8a1249cd389fdb906ac22880e04a4167aadbfe1e
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
