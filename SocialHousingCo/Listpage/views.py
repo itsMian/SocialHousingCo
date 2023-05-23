@@ -16,6 +16,9 @@ def detailspage(request):
 def createpropertypage(request):
     return render(request, 'createproperty.html')
 
+def modalpage(request):
+    return render(request, 'modaltest.html')
+
 def listview(request):
     myproperty = Property.objects.all()
     template = loader.get_template('listpage.html')
@@ -65,7 +68,7 @@ def updateProperty(request, *args, **kwargs):
     prop.postcode = request.POST.get('prop_pcode')
     prop.price = request.POST.get('prop_price')
     prop.bedroom = request.POST.get('prop_bedroom')
-    prop.bathroom = request.POST.get('prop_bedroom')
+    prop.bathroom = request.POST.get('prop_bathroom')
     prop.parking_space = request.POST.get('prop_parking')
     prop.description = request.POST.get('prop_description')
     prop.save()

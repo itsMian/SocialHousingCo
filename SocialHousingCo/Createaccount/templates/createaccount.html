@@ -18,15 +18,26 @@
       justify-content: center;
       align-items: center;
       height: 100px; 
+      padding-bottom: 50px;
     }
     .logo img {
       max-width: 70%;
       max-height: 70%;
     }
+
+    .background {
+
+background-image:  url("{% static 'Login/images/background.png' %}");
+background-size: 100% 100% ;
+background-position-x: center;
+background-attachment: fixed;
+
+}
   </style>
   
 </head>
-<body>
+
+<body class="background">
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -46,30 +57,46 @@
             <form method="POST" action="/login">
               <div class="form-group">
                 <label for="Email">Email:</label>
-                <input type="text" id="Email" name="Email" class="form-control" required>
+                <input type="email" id="Email" name="Email" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
               </div>
-              <input type="submit" value="Set up My Profile" class="btn btn-primary btn-block">
-              
+              <div class="form-group">
+                <label for="password">Confrim Password:</label>
+                <input type="password" id="confrimpassword" name="confirmpassword" class="form-control" required>
+              </div>
+              <div class="d-flex">
+              <input type="submit" value="Set up My Profile as Renter" class=" btn btn-primary btn-block">
+              <p>&nbsp</p>
+              <input type="submit" value="Set up My Profile as Landlord" class=" btn btn-primary btn-block">
+            </div>
+              <p></p>
+              <div style = "position:relative; left:80px; top:2px;">
+              <a href="/forgotpassword" class=" btn btn-link " >Forgot password?</a>
+              <a href="/login" class="  btn btn-link ">Already got an account?</a>
+            </div>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
- 
-  <p></p>
-
-  <div class="card-footer text-center ">
-
-   <text>Already have an account?<a href="/login">Log In</a></text>
-    
 
 </div>
-            
+
+
+  <p></p>
+
   
-</body>
-</html>
+
+  
+</body> 
+    
+
+</html>          
+  
+
+
+
