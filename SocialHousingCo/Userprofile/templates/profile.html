@@ -28,12 +28,12 @@
             <h1 class="profile-title">Personal</h1></div>
 
             <div class="button-container",div style="width:400px; margin-left:20%;">
-                <a href="personal-details.html" class="button">Personal details</a>
-                <a href="about-me.html" class="button">About me</a>
+                <a href="{% url 'personal' %}" class="button">Personal details</a>
+                <a href="{% url 'aboutme' %}" class="button">About me</a>
                 <a href="address-history.html" class="button">Address history</a>
                 <a href="employment.html" class="button">Employment</a>
                 <a href="income.html" class="button">Income</a>
-                <a href="identity-documents.html" class="button">Identity documents</a>
+                <a href="{% url 'identity' %}"class="button">Identity documents</a>
                 <a href="emergency-contact.html" class="button">Emergency contact</a>
                 <a href="tenant-check.html" class="tanant-button">
                 <span class="main-text">Tenant check (recommended)</span><br>
