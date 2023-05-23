@@ -1,16 +1,7 @@
 ./__pycache__
-<<<<<<< HEAD
-
-=======
->>>>>>> bcf37462 (First Commit shavaiz)
 *.pyc
 db.sqlite3
 /env
 *.env
-<<<<<<< HEAD
-.vscode
-
+.vscodes
 .cfg
-=======
-.vscode
->>>>>>> bcf37462 (First Commit shavaiz)
