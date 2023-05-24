@@ -4,4 +4,4 @@ db.sqlite3
 /env
 *.env
 .vscodes
-.cfg
+*.cfg
