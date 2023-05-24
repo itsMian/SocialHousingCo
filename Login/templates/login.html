@@ -16,10 +16,21 @@
       justify-content: center;
       align-items: center;
       height: 100px; 
+      padding-bottom: 50px;
     }
     .logo img {
       max-width: 70%;
       max-height: 70%;
+    }
+
+    .background {
+
+      background-image:  url("{% static 'Login/images/background.png' %}");
+background-size: 100% 100%;
+background-position-x: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+     
     }
 
 
@@ -31,7 +42,7 @@
 
 </head>
 
-    <body style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></body>
+    <body class="background" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></body>
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -46,31 +57,31 @@
           </div>
 
 
-
-            
-            
-         
-
-
-      
-
           <div class="card ">
           <div class="card-header bg-primary text-white">
             <h1 class="text-center">Log In</h1>
           </div>
           <div class="card-body">
-            <form method="POST" action="/login">
+            
+            <form method="POST" action="{% url 'signin' %}">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="Email">Email:</label>
-                <input type="text" id="Email" name="Email" class="form-control" required>
+                <input type="email" id="Email" name="Email" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
               </div>
-              <input type="submit" value="Log In as Renter" class="btn btn-primary btn-block">
-              
+              <input type="submit" value="Log In" class="btn btn-primary btn-block">
+              <p></p>
+              <div style = "position:relative; left:80px; top:2px;">
+              <a href="/forgotpassword" class=" btn btn-link " >Forgot password?</a>
+              <a href="/createaccount" class="  btn btn-link ">Create an Account?</a>
+            </div>
             </form>
+          
+
           </div>
         </div>
       </div>
@@ -79,16 +90,7 @@
 
 
 
-   <div class="card-body text-center">
-            <a href="landlordlogin/" class="btn btn-link">Log In as Landlord Instead </a>
-            </div>
 
-            <p></p>
-
-            <div class="card-footer text-center ">
-                <a href="/forgot-password" class="btn btn-link">Forgot password?</a>
-                <a href="/createaccount" class="btn btn-link">Create an Account?</a>
-            </div>
   
 
           

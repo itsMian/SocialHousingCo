@@ -7,7 +7,6 @@ from django.views import View
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 
-
 def index(request):
     return render(request, 'listpage.html')
 
@@ -16,6 +15,9 @@ def detailspage(request):
 
 def createpropertypage(request):
     return render(request, 'createproperty.html')
+
+def modalpage(request):
+    return render(request, 'modaltest.html')
 
 def listview(request):
     myproperty = Property.objects.all()
@@ -33,7 +35,6 @@ class PropertyDetailView(View):
 
 @csrf_protect
 def storeProperty(request):
-    print(request.POST)
     prop = Property()
     prop.image = request.POST.get('prop_image')
     prop.title = request.POST.get('prop_title')
@@ -67,7 +68,7 @@ def updateProperty(request, *args, **kwargs):
     prop.postcode = request.POST.get('prop_pcode')
     prop.price = request.POST.get('prop_price')
     prop.bedroom = request.POST.get('prop_bedroom')
-    prop.bathroom = request.POST.get('prop_bedroom')
+    prop.bathroom = request.POST.get('prop_bathroom')
     prop.parking_space = request.POST.get('prop_parking')
     prop.description = request.POST.get('prop_description')
     prop.save()
@@ -77,5 +78,4 @@ def updateProperty(request, *args, **kwargs):
 def deleteProperty(request, *args, **kwargs):
     prop = get_object_or_404(Property, id = kwargs['id'])
     prop.delete()
-    messages.success(request, "Property Delete Successfully")
     return redirect('/listpage/')
