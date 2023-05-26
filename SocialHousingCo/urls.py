@@ -24,9 +24,10 @@ urlpatterns = [
 
     path('', include("Home.urls")),
     path('listpage/', include("Listpage.urls")),
+    path('api/', include("Listpage.api")),
     path('admin/', admin.site.urls),
     path('myproperty/', views.showproperty),
     path('login/', include("Login.urls")),
-     path('createaccount/', include("Createaccount.urls")),
-     path('profiles/', include("Userprofile.urls")),
+    path('createaccount/', include("Createaccount.urls")),
+    path('profiles/', include("Userprofile.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

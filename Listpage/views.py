@@ -16,9 +16,6 @@ def detailspage(request):
 def createpropertypage(request):
     return render(request, 'createproperty.html')
 
-def modalpage(request):
-    return render(request, 'modaltest.html')
-
 def listview(request):
     myproperty = Property.objects.all()
     template = loader.get_template('listpage.html')
@@ -79,3 +76,11 @@ def deleteProperty(request, *args, **kwargs):
     prop = get_object_or_404(Property, id = kwargs['id'])
     prop.delete()
     return redirect('/listpage/')
+
+def searchProperty(request):
+    query_list = Property.objects.order_by('-id')
+
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            query_list = query_list.filter(address_icontains=keywords)

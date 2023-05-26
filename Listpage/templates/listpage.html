@@ -33,7 +33,7 @@
                 <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
             </li>
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="#">News</a>
+                <a class="nav-link link-dark" href="/listpage/">List Page</a>
             </li>
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="#">Features</a>
@@ -66,7 +66,7 @@
         <div class="bg-white p-2">
             <a href="/" class="nav-link link-dark">Home</a>
             <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
-            <a href="#" class="nav-link link-dark">News</a>
+            <a href="/listpage/" class="nav-link link-dark">List Page</a>
             <a href="#" class="nav-link link-dark">Features</a>
             <a href="#" class="nav-link link-dark">Support</a>
             <a href="#" class="nav-link link-dark">Contact</a>
@@ -78,9 +78,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
-                <input type="search" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" id="keywords" name="keywords" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
             <button class="btn border-dark rounded d-none d-sm-inline" type="button">Filters</button>
-            <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;">Search</button>
+            <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;" action="{% url 'searchproperty' %}">Search</button>
         </div>
     </div>
     <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
@@ -116,7 +116,8 @@
             </div>
         </div>
     </div>
-
+    
+    {% if mypropertys %}
     {% for property in mypropertys reversed %}
           
     <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
@@ -132,7 +133,7 @@
                             <img src="{% static 'Listpage/images/unknown_prop.png' %}" style="width: 100%;">
                             {% endif %}
                           </div>
-                          <div class="carousel-item">
+                          <!-- <div class="carousel-item">
                             <img src="{% static 'Listpage/images/sample_house2.jpg' %}" style="width: 100%;">
                           </div>
                           <div class="carousel-item">
@@ -140,7 +141,7 @@
                           </div>
                           <div class="carousel-item">
                             <img src="{% static 'Listpage/images/sample_house4.jpg' %}" style="width: 100%;">
-                          </div>
+                          </div> -->
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -172,7 +173,13 @@
             </div>
         </div>
     </div> 
-  {% endfor %}
+    {% endfor %}
+  {% else %}
+  <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
+    <p>No Listings Available</p>
+  </div>
+  {% endif %}
+
 
     <script>
         // Used to toggle the menu on small screens when clicking on the menu button
