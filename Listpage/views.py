@@ -31,6 +31,7 @@ class PropertyDetailView(View):
     def get(self, request, *args, **kwargs):
         property = get_object_or_404(Property, id=kwargs['id'])
         context = {'property': property}
+        print(property.image)
         return render(request, 'detailspage.html', context)
 
 @csrf_protect
