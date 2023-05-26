@@ -10,6 +10,7 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load humanize %}
 </head>
 <body style="background-color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
     <div class="container-fluid p-0">
@@ -77,6 +78,68 @@
         <h1 class="py-4">Welcome To Social Housing Co</h1>
         
     </div>
+
+    <!-- Showcase -->
+<section id="showcase">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h2 class="display-4 mb-4" >
+            <strong>Quality Price Location</strong> 
+          </h2>
+          <p class="lead"></p>
+          <div class="search">
+            <form action="">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">State</label>
+                  <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">State (All)</option>
+                    {% for key,value in state_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label class="sr-only">Bedrooms</label>
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                    {% for key,value in bedroom_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <select name="price" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">Max Price (Any)</option>
+                    {% for key,value in price_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block mt-4" style="background-color: #80D8FF; color: black;" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
     
 </body>
