@@ -33,8 +33,28 @@ background-position-x: center;
 background-attachment: fixed;
 
 }
+
   </style>
   
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('input[type="checkbox"]').click(function() {
+      if ($(this).prop('checked')) {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+      }
+    });
+  });
+  $(document).ready(function() {
+    $('form').submit(function(event) {
+      var checkedCount = $('input[type="checkbox"]:checked').length;
+      if (checkedCount === 0) {
+        event.preventDefault();
+        alert('Please select at least one checkbox.');
+      }
+    });
+  });
+</script>
 </head>
 
 <body class="background">
@@ -53,6 +73,7 @@ background-attachment: fixed;
           <div class="card-header bg-primary text-white">
             <h1 class="text-center">Create an Account</h1>
           </div>
+
           <div class="card-body">
             <form method="POST" action="{% url 'register' %}">
               {% csrf_token %}
@@ -70,15 +91,21 @@ background-attachment: fixed;
                 <input type="password" id="confrimpassword" name="confirmpassword" class="form-control" required>
               </div>
 
-              <div class="form-group">
+
+
+
+              <div class="form-group"  >
                 <label for="role">Role:</label>
-                <input value ='Renter' type="radio" id="renter" name="role"  required>
+               
+                &nbsp;
+                <input value ='Renter' type="checkbox" id="renter" name="role"  >
                 <label for="renter">Renter</label>
-                
-                <input value ='Landlord' type="radio" id="landlord" name="role"  required>
+                &nbsp;
+                <input value ='Landlord' type="checkbox" id="landlord" name="role"  >
                 <label for="landlord">Landlord</label>
               </div>
 
+              
     
               <div class="d-flex">
 
