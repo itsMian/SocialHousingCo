@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Createaccount',
     'Userprofile',
     'Home'
+    
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
+

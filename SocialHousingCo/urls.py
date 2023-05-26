@@ -29,4 +29,7 @@ urlpatterns = [
     path('login/', include("Login.urls")),
      path('createaccount/', include("Createaccount.urls")),
      path('profiles/', include("Userprofile.urls")),
+    
+    
+     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
