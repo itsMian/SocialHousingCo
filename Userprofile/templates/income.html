@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <title> Personal Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="#" class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="Your Logo" />
+            </a>
+        </div>
+    </header>
+    <div class= "sub-header" >
+        <h1 class="personal-title">Income (after tax)</h1>
+    </div>
+
+    <div style="width:400px; margin-left:20%; margin-top: 3%;">
+        <h3 class="label">Sources of income</h6>
+        <p style="white-space: nowrap;">Add all your income sources to help show you can afford the rent.</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">What type of income is it?</h6>
+            {{ form.income_type }}
+        </div>
+
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">Pay frequency</h6>
+            {{ form.pay_frequency }}
+        </div>
+
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">Amount (after tax)</h6>
+            {{ form.amount_after_tax }}
+        </div>
+
+        <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
+            <div class="button-container">
+                <button class="cancel-btn" onclick="location.href='{% url 'profiles' %}'">Cancel</button>
+                <input type="submit" class="save-btn" value="Save and back">
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
