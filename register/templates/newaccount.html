@@ -27,7 +27,7 @@
 
     .background {
 
-background-image:  url("{% static 'Login/images/background.png' %}");
+background-image:  url("{% static 'register/images/background.png' %}");
 background-size: 100% 100% ;
 background-position-x: center;
 background-attachment: fixed;
@@ -64,7 +64,7 @@ background-attachment: fixed;
       
         <div class="logo text-center">
             <a class="nav-link link-dark" href="/">
-                <img src="{% static 'Listpage/images/logo_new.png' %}" alt="LOGO" >
+                <img src="{% static 'register/images/logo_new.png' %}" alt="LOGO" >
             </a>
             
           </div>
@@ -75,36 +75,48 @@ background-attachment: fixed;
           </div>
 
           <div class="card-body">
-            <form method="POST" action="{% url 'register' %}">
+            <form method="POST" action="{% url 'newaccount' %}">
               {% csrf_token %}
 
               <div class="form-group">
-                <label for="Email">Email:</label>
-                <input type="email" id="Email" name="Email" class="form-control" required>
+                <label for="email">Email:</label>
+                {{ form.username }}
+                
               </div>
+
               <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                {{ form.password1 }}
               </div>
+
+
               <div class="form-group">
                 <label for="password">Confrim Password:</label>
-                <input type="password" id="confrimpassword" name="confirmpassword" class="form-control" required>
+                {{ form.password2 }}
               </div>
-
-
 
 
               <div class="form-group"  >
                 <label for="role">Role:</label>
                
                 &nbsp;
-                <input value ='Renter' type="checkbox" id="renter" name="role"  >
+                {{ form.is_renter }}
+
+
                 <label for="renter">Renter</label>
                 &nbsp;
-                <input value ='Landlord' type="checkbox" id="landlord" name="role"  >
+                {{ form.is_landlord}}
                 <label for="landlord">Landlord</label>
               </div>
 
+              <span class="mb-0 text-danger text-center" style = "position:relative; left:190px;  ">
+                {% if msg %}
+                    {{ msg | safe }}
+                {% else %}
+                  
+                {% endif %}
+              </span>
+  
               
     
               <div class="d-flex">
@@ -115,6 +127,11 @@ background-attachment: fixed;
               
            
             </div>
+
+
+            
+
+
 
 
               <p></p>
@@ -139,9 +156,3 @@ background-attachment: fixed;
   
 </body> 
     
-
-</html>          
-  
-
-
-

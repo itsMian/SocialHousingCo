@@ -1,4 +1,7 @@
-{% load static %}
+
+
+
+    {% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +28,7 @@
 
     .background {
 
-      background-image:  url("{% static 'Login/images/background.png' %}");
+      background-image:  url("{% static 'register/images/background.png' %}");
 background-size: 100% 100%;
 background-position-x: center;
 background-repeat: no-repeat;
@@ -51,7 +54,7 @@ background-attachment: fixed;
 
         <div class="logo text-center ">
             <a class="nav-link link-dark" href="/">
-                <img src="{% static 'Login/images/logo_new.png' %}" alt="LOGO" >
+                <img src="{% static 'register/images/logo_new.png' %}" alt="LOGO" >
             </a>
             
           </div>
@@ -63,21 +66,41 @@ background-attachment: fixed;
           </div>
           <div class="card-body">
             
-            <form method="POST" action="{% url 'signin' %}">
-              {% csrf_token %}
-              <div class="form-group">
-                <label for="Email">Email:</label>
-                <input type="email" id="Email" name="Email" class="form-control" required>
+
+            <div class="card-body">
+            <form  method="post" action="{% url 'login_view' %}">
+                {% csrf_token %}
+              <div class="form-group ">
+                <label for="email">Email</label>
+                  {{ form.username }}
               </div>
               <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+                <label for="password">Password</label>
+                {{ form.password }}
               </div>
-              <input type="submit" value="Log In" class="btn btn-primary btn-block">
+
+              <div class="d-flex mb-2 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                  <input type="checkbox" checked="checked"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </div>
+
+            <span class="mb-0 text-danger text-center" style = "position:relative; left:150px; ">
+              {% if msg %}
+                  {{ msg | safe }}
+              {% else %}
+                
+              {% endif %}
+            </span>
+
+
+              <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+          
               <p></p>
               <div style = "position:relative; left:80px; top:2px;">
               <a href="/forgotpassword" class=" btn btn-link " >Forgot password?</a>
-              <a href="/createaccount" class="  btn btn-link ">Create an Account?</a>
+              <a href="newaccount/" class="  btn btn-link ">Create new account?</a>
             </div>
             </form>
           
