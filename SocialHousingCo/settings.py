@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,10 +45,10 @@ INSTALLED_APPS = [
     'Listpage',
     'bootstrap5',
     'Database',
-    'Login',
-    'Createaccount',
     'Userprofile',
-    'Home'
+    'Home',
+    'register',
+    
     
 ]
 
@@ -145,4 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
+
+AUTH_USER_MODEL = 'register.User'
 
