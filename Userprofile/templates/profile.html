@@ -15,15 +15,19 @@
     <body>
         <header class="header">
             <div class="logo-container">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="{% static 'images/logo.png' %}" alt="Your Logo" />
                 </a>
             </div>
         </header>
         <div style="width:400px; margin-left:20%;">
             <h1 class="renterprofile-title">Your Application</h1>
-            <p class="subtitle">Create your Renter Profile once and reuse it for all your applications.</p></div>
+           
+           
+            <a href="{% url 'logout' %}">Sign Out</a>
 
+
+            
         <div style="width:400px; margin-left:20%;">
             <h1 class="profile-title">Personal</h1></div>
 
