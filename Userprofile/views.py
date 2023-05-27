@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Profiles
 from .forms import IncomeForm
+from django.contrib.auth import logout
+
 
 
 def index(request):
@@ -37,3 +39,9 @@ def income_create(request):
 
 def referal_letter(request):
     return render(request, 'referal-letter.html')
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')  
