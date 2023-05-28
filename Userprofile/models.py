@@ -1,11 +1,12 @@
 from django.db import models
+from  register.models import User
 
 class Profiles(models.Model):
     Firstname = models.CharField(max_length=100,default='')
     Lastname = models.CharField(max_length=100,default='')
     DOB = models.DateField()
     PhoneNum = models.CharField(max_length=11,default='')
-   
+    aboutme = models.CharField(max_length=2000,default='')
 
 class Income(models.Model):
     profile = models.ForeignKey(Profiles, on_delete=models.CASCADE)

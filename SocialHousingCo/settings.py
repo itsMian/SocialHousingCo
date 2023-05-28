@@ -51,8 +51,7 @@ INSTALLED_APPS = [
     'Userprofile',
     'Home',
     'register',
-    
-    
+
 ]
 
 MIDDLEWARE = [
@@ -142,6 +141,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+DATE_FORMAT = 'd-m-Y'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -160,8 +161,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
-## Please change 'C:\Users\Mian\Documents\SocialHousingCo' to your project directory
-GDAL_LIBRARY_PATH = r'C:\Users\Mian\Documents\SocialHousingCo\.venv\OSGeo4W\bin\gdal307'
+## Please change 'C:\OSGeo4W' with your OSGeo4W directory
+GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
 
 AUTH_USER_MODEL = 'register.User'
 
