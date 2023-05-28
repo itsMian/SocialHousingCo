@@ -12,6 +12,7 @@ urlpatterns = [
     path("<int:id>/edit/", views.PropertyEditView.as_view(), name="editproperty"),
     path("<int:id>/updadeproperty/", views.updateProperty, name="updateproperty"),
     path("<int:id>/deleteproperty/", views.deleteProperty, name="deleteproperty"),
-    path("search/", views.searchProperty, name='searchproperty')
+    path("search/", views.searchProperty, name='searchproperty'),
+    path("sort/", views.sortProperty, name='sortproperty'),
 ]
 

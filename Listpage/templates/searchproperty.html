@@ -3,79 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}List Page {% endblock %}</title>
+    <title>{% block title %}List Page | Search {% endblock %}</title>
     <meta charset="UTF-8">
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
-
-    <style>
-        .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 200px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-header {
-  padding: 2px 16px;
-  background-color: gainsboro;
-}
-
-.modal-body {padding: 2px 16px;}
-
-.modal-footer {
-  padding: 2px 16px;
-}
-    </style>
-
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -148,14 +79,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
-                <input type="search" id="keywords" name="keywords" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" id="keywords" name="keywords" value="{{ values.keywords }}" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
                 <button class="btn border-dark rounded d-none d-sm-inline" type="button" id="filterBtn" data-toggle="modal">Filters</button>
                 <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;">Search</button>
             </form>
         </div>
     </div>
-
-
     <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
         <div class="text-center d-sm-none"><span>1-25 of 468 results</span></div>
     </div>
@@ -175,20 +104,25 @@
             <div class="col-sm-2 d-flex justify-content-center d-none d-sm-block align-self-center">1-25 of 468 results</div>
             <div class="col-xs-3 col-sm-2 d-flex text-center">
                 <span class="align-self-center px-2">Sort</span>
-                <form method="GET" action="">
-                    <select name="sort" class="form-control">
-                        <option selected="true">Latest</option>
-                        {% for key,value in sort_choices.items %}
-                        <option value="{{ key }}">{{ value }}</option>
-                        {% endfor %}
-                    </select>     
+                <form method="GET">
+                <span class="dropdown">
+                    <button class="btn btn-white border-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      Featured
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item active" href="#">Featured</a></li>
+                        <li><a class="dropdown-item" name="latest" href="{% url 'sortproperty' %}">Latest</a></li>
+                        <li><a class="dropdown-item" name="priceAsc" href="{% url 'sortproperty' %}">Price from low to high</a></li>
+                        <li><a class="dropdown-item" name="priceDesc" href="{% url 'sortproperty' %}">Price from high to low</a></li>
+                    </ul>    
+                </span>
                 </form>
             </div>
         </div>
     </div>
     
-    {% if mypropertys %}
-    {% for property in mypropertys reversed %}
+    {% if listings %}
+    {% for property in listings reversed %}
           
     <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
         <div class="container-fluid py-2">
@@ -250,80 +184,91 @@
   </div>
   {% endif %}
 
-    <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
-        <div id="filterPopup" class="modal">
-        <form method="GET">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="mx-auto">Filters</h2>
-                    <span class="close">&times;</span>
+  <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
+    <div id="filterPopup" class="modal">
+    <form method="GET">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="mx-auto">Filters</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                    <h5>Keywords</h5>
+                    <input type="search" name="keywords" class="rounded" value="{{ values.keywords }}" style="width: 460px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
+                    <hr/>
+                    <h5>Price Range</h5>
+                        <select name="price" class="form-control">
+                            <option selected="true" disabled="disabled">Max Price</option>
+                            {% for key,value in price_choices.items %}
+                                <option value="{{ key }}" 
+                                {% if key == values.price %}
+                                    selected
+                                {% endif %}
+                                >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    <hr/>
+                    <h5>Bedroom</h5>
+                        <select name="bedroom" class="form-control">
+                            <option selected="true" disabled="disabled">Max Bedroom</option>
+                            {% for key,value in bedroom_choices.items %}
+                                <option value="{{ key }}" 
+                                {% if key == values.bedroom %}
+                                    selected
+                                {% endif %}
+                                >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    <hr/>
+                    <h5>Bathroom</h5>
+                        <select name="bathroom" class="form-control">
+                            <option selected="true" disabled="disabled">Max Bathroom</option>
+                            {% for key,value in bathroom_choices.items %}
+                                <option value="{{ key }}" 
+                                {% if key == values.bathroom %}
+                                    selected
+                                {% endif %}
+                                >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    <hr/>
+                    <h5>Parking Space</h5>
+                        <select name="parking" class="form-control">
+                            <option selected="true" disabled="disabled">Max Parking</option>
+                            {% for key,value in parking_choices.items %}
+                                <option value="{{ key }}" 
+                                {% if key == values.parking %}
+                                    selected
+                                {% endif %}
+                                >{{ value }}</option>
+                            {% endfor %}
+                        </select>
+            </div>
+                <div class="modal-footer">
+                    <input type="reset" value="Clear" class="border-0 bg-white" />
+                    <button type="submit" class="btn" style="background-color: #80D8FF;" formaction="{% url 'searchproperty' %}">Submit</button>
                 </div>
-                <div class="modal-body">
-                        <h5>Keywords</h5>
-                        <input type="search" name="keywords" class="rounded" style="width: 460px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
-                        <hr/>
-                        <h5>Price Range</h5>
-                            <select name="price" class="form-control">
-                                <option selected="true" disabled="disabled">Max Price</option>
-                                {% for key,value in price_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                        <hr/>
-                        <h5>Bedroom</h5>
-                            <select name="bedroom" class="form-control">
-                                <option selected="true" disabled="disabled">Max Bedroom</option>
-                                {% for key,value in bedroom_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                        <hr/>
-                        <h5>Bathroom</h5>
-                            <select name="bathroom" class="form-control">
-                                <option selected="true" disabled="disabled">Max Bathroom</option>
-                                {% for key,value in bathroom_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                        <hr/>
-                        <h5>Parking Space</h5>
-                            <select name="parking" class="form-control">
-                                <option selected="true" disabled="disabled">Max Parking</option>
-                                {% for key,value in parking_choices.items %}
-                                <option value="{{ key }}">{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                </div>
-                    <div class="modal-footer">
-                        <input type="reset" value="Clear" class="border-0 bg-white" />
-                        <button type="submit" class="btn" style="background-color: #80D8FF;" formaction="{% url 'searchproperty' %}">Submit</button>
-                    </div>
-              </div>
-        </div>
-        </form>
-        </div>
+          </div>
     </div>
-  
+    </form>
+    </div>
+</div>
 
 
-  <script>
+<script>
     // Get the modal
     var modal = document.getElementById("filterPopup");
     // Get the button that opens the modal
     var btn = document.getElementById("filterBtn");
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-    var cancelBtn = document.getElementsByClassName("cancel")[0];
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
       modal.style.display = "block";
     }
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-      modal.style.display = "none";
-    }
-    cancelBtn.onclick = function() {
       modal.style.display = "none";
     }
     // When the user clicks anywhere outside of the modal, close it
@@ -333,7 +278,6 @@
       }
     }
     </script>
-
     <script>
         // Used to toggle the menu on small screens when clicking on the menu button
         function myFunction() {
