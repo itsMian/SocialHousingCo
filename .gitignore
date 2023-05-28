@@ -5,4 +5,7 @@ db.sqlite3
 *.env
 .vscodes
 pyvenv.cfg
+<<<<<<< HEAD
 node_modules
+=======
+>>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c

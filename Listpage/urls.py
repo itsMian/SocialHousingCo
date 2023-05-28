@@ -14,6 +14,9 @@ urlpatterns = [
     path("<int:id>/deleteproperty/", views.deleteProperty, name="deleteproperty"),
     path("search/", views.searchProperty, name='searchproperty'),
     path("sort/", views.sortProperty, name='sortproperty'),
+<<<<<<< HEAD
     path("mapview/", views.mapview, name='mapview'),
+=======
+>>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
 ]
 

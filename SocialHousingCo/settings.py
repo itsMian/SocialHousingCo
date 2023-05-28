@@ -50,7 +50,16 @@ INSTALLED_APPS = [
     'Database',
     'Userprofile',
     'Home',
+<<<<<<< HEAD
     'register',
+=======
+<<<<<<< HEAD
+=======
+    'register',
+    
+    
+>>>>>>> 7d68a0fc69ef4dc90d9a9eb15c73b09f3044b04d
+>>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
 ]
 
 MIDDLEWARE = [
@@ -160,8 +169,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
+<<<<<<< HEAD
 ## Please change 'C:\OSGeo4W' with your OSGeo4W directory
 GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
 
 AUTH_USER_MODEL = 'register.User'
 
+=======
+<<<<<<< HEAD
+GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
+=======
+AUTH_USER_MODEL = 'register.User'
+
+>>>>>>> 7d68a0fc69ef4dc90d9a9eb15c73b09f3044b04d
+>>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c

@@ -24,6 +24,10 @@ urlpatterns = [
     path('', include("Home.urls")),
     path('listpage/', include("Listpage.urls")),
     path('api/', include("Listpage.api")),
+<<<<<<< HEAD
+=======
+    path('admin/', admin.site.urls),
+>>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
     path('myproperty/', views.showproperty),
     path('profiles/', include("Userprofile.urls")),
     path('login/', include("register.urls")),
