@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script>
+
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -43,7 +44,7 @@
             {% endif %}
             
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="#">News</a>
+                <a class="nav-link link-dark" href="/listpage/">List Page</a>
             </li>
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="#">Features</a>
@@ -79,9 +80,7 @@
         {% if user.is_landlord %}
             <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
         {% endif %}
-            
-
-            <a href="#" class="nav-link link-dark">News</a>
+            <a href="/listpage/" class="nav-link link-dark">List Page</a>
             <a href="#" class="nav-link link-dark">Features</a>
             <a href="#" class="nav-link link-dark">Support</a>
             <a href="#" class="nav-link link-dark">Contact</a>
@@ -89,14 +88,14 @@
     </div>
 
     <div class="container-fluid px-0 py-2 border border-dark">
-        <a class="ms-3" href="/listpage">
+        <a class="mx-3" href="/listpage">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
         </svg>Back to results</a>
 
-
+        
     {% if user.is_landlord %}
-        <a class="btn btn-white" class="float: right;" type="button" href="{% url 'editproperty' property.id %}">Edit</a>
+        <a class="mx-3 float-end" href="{% url 'editproperty' property.id %}">Edit</a>
     {% endif %}
 
         
@@ -113,7 +112,7 @@
                         <img src="{% static 'Listpage/images/unknown_prop.png' %}" style="width: 100%;">
                         {% endif %}
                       </div>
-                      <div class="carousel-item">
+                      <!-- <div class="carousel-item">
                         <img src="{% static 'Listpage/images/sample_house2.jpg' %}" style="width: 100%;">
                       </div>
                       <div class="carousel-item">
@@ -121,7 +120,7 @@
                       </div>
                       <div class="carousel-item">
                         <img src="{% static 'Listpage/images/sample_house4.jpg' %}" style="width: 100%;">
-                      </div>
+                      </div> -->
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -144,14 +143,13 @@
                     <h6>Available Now</h6>
                 </div>
                 <div class="col-md-4 px-1 d-none d-sm-block">
-                    
                     {% if property.image %}
-                        <img src="{{ property.image.url }}" class="img-fluid">
-                        {% else %}
-                        <img src="{% static 'Listpage/images/unknown_prop.png' %}" class="img-fluid">
-                        {% endif %}
+                    <img src="{{property.image.url}}" class="img-fluid" alt="Sample House 1">
+                    {% else %}
+                    <img src="{% static 'Listpage/images/unknown_prop.png' %}" class="img-fluid" alt="N/A">
+                    {% endif %}
                 </div>
-                <div class="col-md-2 d-none d-sm-block">
+                <!-- <div class="col-md-2 d-none d-sm-block">
                     <div class="row-md-4">
                         <img src="{% static 'Listpage/images/sample_house2.jpg' %}" style="max-width: 70%;" alt="Sample House 2">
                     </div>
@@ -161,26 +159,11 @@
                     <div class="row-md-4">
                         <img src="{% static 'Listpage/images/sample_house4.jpg' %}" style="max-width: 70%;" alt="Sample House 4">
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container-fluid py-3">
             <div id="map"></div>
-            <!-- <div class="my-3 float-md-end">
-                <div class="border border-dark p-3" style="margin: 0 auto;">
-                    <a class="link-dark" href="/listpage"><svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg></a>
-                    <span class="ps-4" style="font-size: 18px;">Lee Chen</span>
-                    <hr class="border border-dark">
-                    <div class="d-grid gap-3 col-6 mx-auto py-3">
-                        <button class="border-0 p-2 bg-danger text-white">Contact me</button>
-                        <button class="border-0 p-2">Apply</button>
-                        <button class="border-0 p-2">Inspections</button>
-                    </div>
-                </div>
-            </div> -->
             <div class="m-auto">
                 <div class="accordion mx-auto" style="max-width: 650px;" id="myAccordion">
                     <div class="accordion-item">
@@ -200,8 +183,13 @@
         </div>
     </div>
 
-    <script src="{% static 'map.js' %}" defer>
-
+    <!-- <script src="{% static 'map.js' %}" defer></script> -->
+    <script>
+        var map = L.map('map').setView([-33.865143, 151.209900], 12);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
     </script>
     <script>
         // Used to toggle the menu on small screens when clicking on the menu button
