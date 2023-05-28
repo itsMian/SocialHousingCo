@@ -21,12 +21,11 @@
             </div>
         </header>
         <div style="width:400px; margin-left:20%;">
-            <h1 class="renterprofile-title">Your Application</h1>
-
-            <a href="{% url 'logout' %}">Sign Out</a>
+            <h1 class="renterprofile-title"> {{ user.username }} Your Application</h1>
 
 
-            <p class="subtitle">Create your Landlord Profile. </p></div>
+
+            <p class="subtitle">  Update your Landlord Profile. </p></div>
 
         <div style="width:400px; margin-left:20%;">
             <h1 class="profile-title"> Landord Personal</h1></div>
@@ -37,13 +36,9 @@
                 <a href="identity-documents.html" class="button">Identity documents</a>
                  </a></div>
 
-<<<<<<< HEAD
                  <div style=" margin-left: 420px;" >
                     <a href="{% url 'logout' %}" class="btn btn-danger">Sign Out</a>
                 </div>
-=======
-    
->>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
 
      </body>
 

@@ -21,15 +21,14 @@
             </div>
         </header>
         <div style="width:400px; margin-left:20%;">
-            <h1 class="renterprofile-title">Your Application</h1>
+            <h1 class="renterprofile-title"> {{ user.username }} Your Application</h1>
            
+       
            
-            <a href="{% url 'logout' %}">Sign Out</a>
-
 
             
-        <div style="width:400px; margin-left:20%;">
-            <h1 class="profile-title">Ranter Personal</h1></div>
+        <div style="width:400px; margin-left:37%;">
+            <h1 class="profile-title">Renter Personal</h1></div>
 
             <div class="button-container",div style="width:400px; margin-left:20%;">
                 <a href="{% url 'personal' %}" class="button">Personal details</a>
@@ -38,17 +37,15 @@
                 <a href="{% url 'identity' %}"class="button">Identity documents</a>
                 <a href="{% url 'referal' %}" class="tanant-button">
                 <span class="main-text">Referral letter/Reference attachment (recommended)</span><br>
-                <span class="extra-text">Give yourself a better chance. Help property managers evaluate you faster.</span>
+                <span class="extra-text">Give yourself a better chance.</span>
                  </a></div>
 
-        
+
+                 
+                <div style=" margin-left: 200px;" >
+                    <a href="{% url 'logout' %}" class="btn btn-danger">Sign Out</a>
+                </div>
   
-
-<<<<<<< HEAD
-                
-
-=======
->>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
      </body>
 
 </html>
