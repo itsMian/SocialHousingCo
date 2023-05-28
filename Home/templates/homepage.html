@@ -10,6 +10,7 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load humanize %}
 </head>
 <body style="background-color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
     <div class="container-fluid p-0">
@@ -29,9 +30,16 @@
             <li class="nav-item align-self-center d-none d-sm-block">
                 <a class="nav-link link-dark" href="/">Home</a>
             </li>
+
+            {% if user.is_landlord %}
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
-            </li>
+              <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
+          </li>
+        {% endif %}
+        
+
+
+
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="/listpage/">List Page</a>
             </li>
@@ -51,6 +59,28 @@
                     </svg>
                 </a>
             </li>
+
+
+
+          {%if user.is_renter %}
+            <li class="nav-item align-self-center">
+              <a class="nav-link link-dark" href="/profiles">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+              </a>
+          </li>
+          {%elif user.is_landlord %}
+          <li class="nav-item align-self-center">
+            <a class="nav-link link-dark" href="/profiles/landlord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+            </a>
+        </li>
+          {%else%}
             <li class="nav-item align-self-center">
                 <a class="nav-link link-dark" href="/login">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -59,6 +89,8 @@
                     </svg>
                 </a>
             </li>
+          {%endif%}
+
         </ul>
     </div>
 
@@ -66,7 +98,7 @@
         <div class="bg-white p-2">
             <a href="/" class="nav-link link-dark">Home</a>
             <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
-            <a href="#" class="nav-link link-dark">News</a>
+            <a href="/Listpage/" class="nav-link link-dark">List Page</a>
             <a href="#" class="nav-link link-dark">Features</a>
             <a href="#" class="nav-link link-dark">Support</a>
             <a href="#" class="nav-link link-dark">Contact</a>
@@ -77,6 +109,68 @@
         <h1 class="py-4">Welcome To Social Housing Co</h1>
         
     </div>
+
+    <!-- Showcase -->
+<section id="showcase">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h2 class="display-4 mb-4" >
+            <strong>Quality Price Location</strong> 
+          </h2>
+          <p class="lead"></p>
+          <div class="search">
+            <form action="">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">State</label>
+                  <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">State (All)</option>
+                    {% for key,value in state_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label class="sr-only">Bedrooms</label>
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                    {% for key,value in bedroom_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <select name="price" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">Max Price (Any)</option>
+                    {% for key,value in price_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block mt-4" style="background-color: #80D8FF; color: black;" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
     
 </body>

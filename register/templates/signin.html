@@ -1,0 +1,124 @@
+
+
+
+    {% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Login Page {% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  <!-- Link to Bootstrap CSS file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+    <style>
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px; 
+      padding-bottom: 50px;
+    }
+    .logo img {
+      max-width: 70%;
+      max-height: 70%;
+    }
+
+    .background {
+
+      background-image:  url("{% static 'register/images/background.png' %}");
+background-size: 100% 100%;
+background-position-x: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+     
+    }
+
+
+
+  </style>
+  
+
+
+
+</head>
+
+    <body class="background" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+    
+ 
+
+        <div class="logo text-center ">
+            <a class="nav-link link-dark" href="/">
+                <img src="{% static 'register/images/logo_new.png' %}" alt="LOGO" >
+            </a>
+            
+          </div>
+
+
+          <div class="card ">
+          <div class="card-header bg-primary text-white">
+            <h1 class="text-center">Log In</h1>
+          </div>
+          <div class="card-body">
+            
+
+            <div class="card-body">
+            <form  method="post" action="{% url 'login_view' %}">
+                {% csrf_token %}
+              <div class="form-group ">
+                <label for="email">Email</label>
+                  {{ form.username }}
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password }}
+              </div>
+
+              <div class="d-flex mb-2 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                  <input type="checkbox" checked="checked"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </div>
+
+            <span class="mb-0 text-danger text-center" style = "position:relative; left:150px; ">
+              {% if msg %}
+                  {{ msg | safe }}
+              {% else %}
+                
+              {% endif %}
+            </span>
+
+
+              <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+          
+              <p></p>
+              <div style = "position:relative; left:80px; top:2px;">
+              <a href="/forgotpassword" class=" btn btn-link " >Forgot password?</a>
+              <a href="newaccount/" class="  btn btn-link ">Create new account?</a>
+            </div>
+            </form>
+          
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+          
+
+</body>
+</html>
+
+

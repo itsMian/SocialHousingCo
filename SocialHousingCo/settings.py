@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -44,13 +44,15 @@ INSTALLED_APPS = [
     "django.contrib.gis",
     'rest_framework',
     'rest_framework_gis',
+    'django.contrib.humanize',
     'Listpage',
     'bootstrap5',
     'Database',
-    'Login',
-    'Createaccount',
     'Userprofile',
     'Home',
+    'register',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -158,4 +160,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
-GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
+## Please change 'C:\Users\Mian\Documents\SocialHousingCo' to your project directory
+GDAL_LIBRARY_PATH = r'C:\Users\Mian\Documents\SocialHousingCo\.venv\OSGeo4W\bin\gdal307'
+
+AUTH_USER_MODEL = 'register.User'
+

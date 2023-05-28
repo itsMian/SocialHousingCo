@@ -21,13 +21,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-
     path('', include("Home.urls")),
     path('listpage/', include("Listpage.urls")),
     path('api/', include("Listpage.api")),
-    path('admin/', admin.site.urls),
     path('myproperty/', views.showproperty),
-    path('login/', include("Login.urls")),
-    path('createaccount/', include("Createaccount.urls")),
     path('profiles/', include("Userprofile.urls")),
+    path('login/', include("register.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

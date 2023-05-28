@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Listpage | Map View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script>
+
+    <style>
+      #map {
+        max-width: 100%;
+        height: 590px;
+        text-align: center;
+        padding: 100px 0;
+        margin: 0 auto;
+      }
+    </style>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  </head>
+
+  <body style="background-color: gainsboro; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <div class="container-fluid p-0">
+        <ul class="nav" style="background-color: #80D8FF;">
+            <li class="nav-item align-self-center d-sm-none">
+                <a class="nav-link link-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </a>
+            </li>
+            <li class="nav-item align-self-center">
+                <a class="nav-link link-dark" href="/">
+                    <img src="{% static 'Listpage/images/logo_new.png' %}" alt="LOGO" width="140" height="40.2">
+                </a>
+            </li>
+            <li class="nav-item align-self-center d-none d-sm-block">
+                <a class="nav-link link-dark" href="/">Home</a>
+            </li>
+
+
+            {% if user.is_landlord %}       
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
+            </li>
+            {% endif %}
+
+
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="/listpage/">List Page</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Features</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Support</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+                <a class="nav-link link-dark" href="#">Contact</a>
+            </li>
+            <li class="nav-item align-self-center ms-auto">
+                <a class="nav-link link-dark" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                    </svg>
+                </a>
+            </li>
+            {%if user.is_renter %}
+            <li class="nav-item align-self-center">
+              <a class="nav-link link-dark" href="/profiles">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+              </a>
+          </li>
+          {%elif user.is_landlord %}
+          <li class="nav-item align-self-center">
+            <a class="nav-link link-dark" href="/profiles/landlord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+            </a>
+        </li>
+          {%else%}
+            <li class="nav-item align-self-center">
+                <a class="nav-link link-dark" href="/login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                </a>
+            </li>
+          {%endif%}
+        </ul>
+    </div>
+
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-white p-2">
+            <a href="/" class="nav-link link-dark">Home</a>
+
+            
+           
+            
+        {% if user.is_landlord %}
+            <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
+        {% endif %}
+            <a href="/listpage/" class="nav-link link-dark">List Page</a>
+            <a href="#" class="nav-link link-dark">Features</a>
+            <a href="#" class="nav-link link-dark">Support</a>
+            <a href="#" class="nav-link link-dark">Contact</a>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-white border border-bottom py-2">
+        <div class="text-center">
+            <form method="GET" action="{% url 'searchproperty' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                <input type="search" id="keywords" name="keywords" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
+                <button class="btn border-dark rounded d-none d-sm-inline" type="button" id="filterBtn" data-toggle="modal">Filters</button>
+                <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;">Search</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
+        <div class="text-center d-sm-none"><span>1-25 of 468 results</span></div>
+    </div>
+    <div class="container-fluid bg-white border border-bottom py-2">
+        <div class="row justify-content-center">
+            <div class="col-xs-3 col-sm-2 d-flex justify-content-center">
+                <a class="nav-link link-dark" href="{{request.META.HTTP_REFERER}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>List</a>
+                <a class="nav-link link-dark" href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                    </svg>Map</a>
+            </div>
+            <div class="col-sm-5 d-flex justify-content-center d-none d-sm-block align-self-center">All Rental Properties and Real Estate</div>
+            <div class="col-sm-2 d-flex justify-content-center d-none d-sm-block align-self-center">1-25 of 468 results</div>
+            <div class="col-xs-3 col-sm-2 d-flex text-center">
+                <span class="align-self-center px-2">Sort</span>
+                <form method="GET" action="">
+                    <select name="sort" class="form-control">
+                        <option selected="true">Latest</option>
+                        {% for key,value in sort_choices.items %}
+                        <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>     
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+    <script src="{% static 'map.js' %}" defer></script>
+  </body>
+</html>

@@ -7,6 +7,75 @@
     <meta charset="UTF-8">
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: gainsboro;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+}
+    </style>
+
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -29,9 +98,15 @@
             <li class="nav-item align-self-center d-none d-sm-block">
                 <a class="nav-link link-dark" href="/">Home</a>
             </li>
+
+
+            {% if user.is_landlord %}       
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
             </li>
+            {% endif %}
+
+
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="/listpage/">List Page</a>
             </li>
@@ -51,6 +126,25 @@
                     </svg>
                 </a>
             </li>
+            {%if user.is_renter %}
+            <li class="nav-item align-self-center">
+              <a class="nav-link link-dark" href="/profiles">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+              </a>
+          </li>
+          {%elif user.is_landlord %}
+          <li class="nav-item align-self-center">
+            <a class="nav-link link-dark" href="/profiles/landlord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+            </a>
+        </li>
+          {%else%}
             <li class="nav-item align-self-center">
                 <a class="nav-link link-dark" href="/login">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -59,13 +153,20 @@
                     </svg>
                 </a>
             </li>
+          {%endif%}
         </ul>
     </div>
 
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-white p-2">
             <a href="/" class="nav-link link-dark">Home</a>
+
+            
+           
+            
+        {% if user.is_landlord %}
             <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
+        {% endif %}
             <a href="/listpage/" class="nav-link link-dark">List Page</a>
             <a href="#" class="nav-link link-dark">Features</a>
             <a href="#" class="nav-link link-dark">Support</a>
@@ -75,44 +176,45 @@
 
     <div class="container-fluid bg-white border border-bottom py-2">
         <div class="text-center">
+            <form method="GET" action="{% url 'searchproperty' %}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
                 <input type="search" id="keywords" name="keywords" class="rounded border-0" style="width: 320px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
-            <button class="btn border-dark rounded d-none d-sm-inline" type="button">Filters</button>
-            <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;" action="{% url 'searchproperty' %}">Search</button>
+                <button class="btn border-dark rounded d-none d-sm-inline" type="button" id="filterBtn" data-toggle="modal">Filters</button>
+                <button class="btn border-dark rounded d-none d-sm-inline" type="submit" style="background-color: gainsboro;">Search</button>
+            </form>
         </div>
     </div>
+
+
     <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
         <div class="text-center d-sm-none"><span>1-25 of 468 results</span></div>
     </div>
     <div class="container-fluid bg-white border border-bottom py-2">
         <div class="row justify-content-center">
             <div class="col-xs-3 col-sm-2 d-flex justify-content-center">
-                <a class="nav-link link-dark" href="/">
+                <a class="nav-link link-dark" href="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg>List</a>
-                <a class="nav-link link-dark" href="/">
+                <a class="nav-link link-dark" href="mapview/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
                     </svg>Map</a>
             </div>
-            <div class="col-sm-5 d-flex justify-content-center d-none d-sm-block align-self-center">Rental Properties and Real Estate In Burwood NSW 2134</div>
+            <div class="col-sm-5 d-flex justify-content-center d-none d-sm-block align-self-center">All Rental Properties and Real Estate</div>
             <div class="col-sm-2 d-flex justify-content-center d-none d-sm-block align-self-center">1-25 of 468 results</div>
             <div class="col-xs-3 col-sm-2 d-flex text-center">
                 <span class="align-self-center px-2">Sort</span>
-                <span class="dropdown">
-                    <button class="btn btn-white border-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Featured
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item active" href="#">Featured</a></li>
-                      <li><a class="dropdown-item" href="#">Latest</a></li>
-                      <li><a class="dropdown-item" href="#">Price from low to high</a></li>
-                      <li><a class="dropdown-item" href="#">Price from high to low</a></li>
-                    </ul>
-                </span>
+                <form method="GET" action="{% url 'sortproperty' %}">
+                    <select name="sort" class="form-control">
+                        <option selected="true" disabled="disabled"></option>
+                        {% for key,value in sort_choices.items %}
+                        <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>     
+                </form>
             </div>
         </div>
     </div>
@@ -180,6 +282,89 @@
   </div>
   {% endif %}
 
+    <div style="width: 100%; max-width: 1520px; margin: 0 auto;">
+        <div id="filterPopup" class="modal">
+        <form method="GET">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="mx-auto">Filters</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                        <h5>Keywords</h5>
+                        <input type="search" name="keywords" class="rounded" style="width: 460px;" placeholder="Search suburb, postcode or state" aria-label="Search" aria-describedby="search-addon" />
+                        <hr/>
+                        <h5>Price Range</h5>
+                            <select name="price" class="form-control">
+                                <option selected="true" disabled="disabled">Max Price</option>
+                                {% for key,value in price_choices.items %}
+                                <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        <hr/>
+                        <h5>Bedroom</h5>
+                            <select name="bedroom" class="form-control">
+                                <option selected="true" disabled="disabled">Max Bedroom</option>
+                                {% for key,value in bedroom_choices.items %}
+                                <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        <hr/>
+                        <h5>Bathroom</h5>
+                            <select name="bathroom" class="form-control">
+                                <option selected="true" disabled="disabled">Max Bathroom</option>
+                                {% for key,value in bathroom_choices.items %}
+                                <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        <hr/>
+                        <h5>Parking Space</h5>
+                            <select name="parking" class="form-control">
+                                <option selected="true" disabled="disabled">Max Parking</option>
+                                {% for key,value in parking_choices.items %}
+                                <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                </div>
+                    <div class="modal-footer">
+                        <input type="reset" value="Clear" class="border-0 bg-white" />
+                        <button type="submit" class="btn" style="background-color: #80D8FF;" formaction="{% url 'searchproperty' %}">Submit</button>
+                    </div>
+              </div>
+        </div>
+        </form>
+        </div>
+    </div>
+  
+
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("filterPopup");
+    // Get the button that opens the modal
+    var btn = document.getElementById("filterBtn");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    var cancelBtn = document.getElementsByClassName("cancel")[0];
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    cancelBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
 
     <script>
         // Used to toggle the menu on small screens when clicking on the menu button

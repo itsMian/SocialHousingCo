@@ -1,0 +1,7 @@
+dllupdate -oite -copy -reboot "%OSGEO4W_ROOT%\bin\libcrypto-1_1-x64.dll"
+dllupdate -oite -copy -reboot "%OSGEO4W_ROOT%\bin\libssl-1_1-x64.dll"
+if exist "%OSGEO4W_ROOT%\apps\Python39\DLLs" (
+	copy "%OSGEO4W_ROOT%\bin\libcrypto-1_1-x64.dll" "%OSGEO4W_ROOT%\apps\Python39\DLLs\libcrypto-1_1.dll"
+	copy "%OSGEO4W_ROOT%\bin\libssl-1_1-x64.dll" "%OSGEO4W_ROOT%\apps\Python39\DLLs\libssl-1_1.dll"
+)
+exit /b 0
