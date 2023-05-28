@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,10 +48,14 @@ INSTALLED_APPS = [
     'Listpage',
     'bootstrap5',
     'Database',
-    'Login',
-    'Createaccount',
     'Userprofile',
     'Home',
+<<<<<<< HEAD
+=======
+    'register',
+    
+    
+>>>>>>> 7d68a0fc69ef4dc90d9a9eb15c73b09f3044b04d
 ]
 
 MIDDLEWARE = [
@@ -159,4 +163,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
+<<<<<<< HEAD
 GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
+=======
+AUTH_USER_MODEL = 'register.User'
+
+>>>>>>> 7d68a0fc69ef4dc90d9a9eb15c73b09f3044b04d
