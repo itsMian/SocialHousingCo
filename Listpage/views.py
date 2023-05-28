@@ -27,10 +27,7 @@ def listview(request):
     template = loader.get_template('listpage.html')
     context = {
         'mypropertys' : myproperty,
-<<<<<<< HEAD
         'sort_choices': sort_choices,
-=======
->>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
         'bathroom_choices': bathroom_choices,
         'bedroom_choices': bedroom_choices,
         'parking_choices': parking_choices,

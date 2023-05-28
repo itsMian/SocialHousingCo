@@ -1,8 +1,5 @@
 from django.db import models
-<<<<<<< HEAD
 from  register.models import User
-=======
->>>>>>> f2a365cbb09c998935db0e3912ac379dc99ead4c
 
 class Profiles(models.Model):
     Firstname = models.CharField(max_length=100,default='')
