@@ -1,10 +1,12 @@
 from django.db import models
+from register.models import User
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
 # Create your models here.
 
 class Property(models.Model):
+    landlord = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     image = models.FileField(upload_to='image/', blank=True, default='settings.MEDIA_ROOT/image/unknown_prop.png')
     title = models.CharField(max_length=400, default='Title')
     address = models.CharField(max_length=200, default='')
