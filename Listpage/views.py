@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
+from django.db.models import Q
 from Database.models import Property
 from django.http import Http404
 from django.views import View
+from Listpage.choices import price_choices, bedroom_choices, bathroom_choices, parking_choices, sort_choices
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 
@@ -20,7 +22,11 @@ def listview(request):
     myproperty = Property.objects.all()
     template = loader.get_template('listpage.html')
     context = {
-        'mypropertys' : myproperty
+        'mypropertys' : myproperty,
+        'bathroom_choices': bathroom_choices,
+        'bedroom_choices': bedroom_choices,
+        'parking_choices': parking_choices,
+        'price_choices': price_choices
     }
     return HttpResponse(template.render(context, request))
 
@@ -28,6 +34,7 @@ class PropertyDetailView(View):
     def get(self, request, *args, **kwargs):
         property = get_object_or_404(Property, id=kwargs['id'])
         context = {'property': property}
+        print(property.image)
         return render(request, 'detailspage.html', context)
 
 @csrf_protect
@@ -76,11 +83,64 @@ def deleteProperty(request, *args, **kwargs):
     prop = get_object_or_404(Property, id = kwargs['id'])
     prop.delete()
     return redirect('/listpage/')
-
+    
 def searchProperty(request):
-    query_list = Property.objects.order_by('-id')
+    queryset_list = Property.objects.order_by('id')
 
+  # Keywords
     if 'keywords' in request.GET:
         keywords = request.GET['keywords']
         if keywords:
-            query_list = query_list.filter(address_icontains=keywords)
+            queryset_list = queryset_list.filter(Q(address__icontains=keywords) | Q(suburb__icontains=keywords) | 
+                                                Q(state__icontains=keywords) | Q(postcode__icontains=keywords))
+    if 'bedroom' in request.GET:
+        bedrooms = request.GET['bedroom']
+        if bedrooms:
+            queryset_list = queryset_list.filter(bedroom__lte=bedrooms)
+
+    if 'bathroom' in request.GET:
+        bathrooms = request.GET['bathroom']
+        if bathrooms:
+            queryset_list = queryset_list.filter(bathroom__lte=bathrooms)
+
+    if 'parking' in request.GET:
+        parking = request.GET['parking']
+        if parking:
+            queryset_list = queryset_list.filter(parking_space__lte=parking)
+
+    if 'price' in request.GET:
+        price = request.GET['price']
+        if price:
+            queryset_list = queryset_list.filter(price__lte=price)
+
+    context = {
+        'sort_choices': sort_choices,
+        'bedroom_choices': bedroom_choices,
+        'bathroom_choices': bathroom_choices,
+        'parking_choices': parking_choices,
+        'price_choices': price_choices,
+        'listings': queryset_list,
+        'values': request.GET
+    }
+
+    return render(request, 'searchproperty.html', context)
+
+def sortProperty(request):
+    queryset_list_order = Property.objects.order_by('id')
+
+    if 'latest' in request.GET:
+        queryset_list_order = Property.objects.order_by('price').all()
+
+    if 'priceAsc' in request.GET:
+        queryset_list_order = Property.objects.order_by('-price').all()
+
+    if 'priceDesc' in request.GET:
+        queryset_list_order = Property.objects.order_by(Property.price.desc()).all()
+
+    context = {
+        'sort_choices': sort_choices,
+        'listings': queryset_list_order,
+        'values': request.GET
+    }
+
+    return render(request, 'searchproperty.html', context)      
