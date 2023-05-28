@@ -1,6 +1,8 @@
 from django.db import models
+from  register.models import User
 
 class Profiles(models.Model):
+    User_id = models.ForeignKey(User, on_delete=models.CASCADE, default="0")
     Firstname = models.CharField(max_length=100,default='')
     Lastname = models.CharField(max_length=100,default='')
     DOB = models.DateField()
