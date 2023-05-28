@@ -15,25 +15,26 @@
     <body>
         <header class="header">
             <div class="logo-container">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                     <img src="{% static 'images/logo.png' %}" alt="Your Logo" />
                 </a>
             </div>
         </header>
         <div style="width:400px; margin-left:20%;">
             <h1 class="renterprofile-title">Your Application</h1>
+
+            <a href="{% url 'logout' %}">Sign Out</a>
+
+
             <p class="subtitle">Create your Landlord Profile. </p></div>
 
         <div style="width:400px; margin-left:20%;">
-            <h1 class="profile-title">Personal</h1></div>
+            <h1 class="profile-title"> Landord Personal</h1></div>
 
             <div class="button-container",div style="width:400px; margin-left:20%;">
                 <a href="{% url 'personal' %}" class="button">Personal details</a>
                 <a href="{% url 'aboutme' %}" class="button">About me</a>
                 <a href="identity-documents.html" class="button">Identity documents</a>
-                <a href="tenant-check.html" class="tanant-button">
-                <span class="main-text">Tenant check (recommended)</span><br>
-                <span class="extra-text">Give yourself a better chance. Help property managers evaluate you faster.</span>
                  </a></div>
 
     

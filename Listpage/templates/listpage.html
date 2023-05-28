@@ -98,9 +98,15 @@
             <li class="nav-item align-self-center d-none d-sm-block">
                 <a class="nav-link link-dark" href="/">Home</a>
             </li>
+
+
+            {% if user.is_landlord %}       
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
             </li>
+            {% endif %}
+
+
             <li class="nav-item align-self-center ms-auto d-none d-sm-block">
                 <a class="nav-link link-dark" href="/listpage/">List Page</a>
             </li>
@@ -134,7 +140,13 @@
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-white p-2">
             <a href="/" class="nav-link link-dark">Home</a>
+
+            
+           
+            
+        {% if user.is_landlord %}
             <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
+        {% endif %}
             <a href="/listpage/" class="nav-link link-dark">List Page</a>
             <a href="#" class="nav-link link-dark">Features</a>
             <a href="#" class="nav-link link-dark">Support</a>
