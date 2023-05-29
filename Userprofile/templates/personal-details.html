@@ -56,6 +56,10 @@
                 <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
                 {% endif %}
                 <button type="submit" class="save-btn" formaction="{% url 'updatedetails' %}">Save and back</button>
+                <!-- <form method="POST" action="{% url 'button' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="save-btn">Save and back</button>
+                </form> -->
                 
             </div>
         </div>

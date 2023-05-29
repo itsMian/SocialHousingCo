@@ -13,7 +13,10 @@ class User(AbstractUser):
     phone = models.CharField(max_length=10, default='')
     aboutme = models.CharField(max_length=2000, default='')
 
-    
+    income_type = models.CharField(max_length=20, default='')
+    pay_frequency = models.CharField(max_length=20, default='')
+    amount_after_tax = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+
     
     
 

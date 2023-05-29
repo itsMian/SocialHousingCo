@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
+from django.template import loader
 from .models import Profiles
 from register.models import User
 from .forms import IncomeForm
+from .choices import income_type_choices, pay_frequency_choices
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 
@@ -60,6 +62,28 @@ def income_create(request):
         form = IncomeForm()
     return render(request, 'income.html', {'form': form})
 
+def income(request):
+    user = request.user
+    user.income_type = request.POST.get('income_type')
+    user.pay_frequency = request.POST.get('pay_frequency')
+    user.amount_after_tax = request.POST.get('amount_after_tax')
+    context = {
+        'income_type_choices': income_type_choices,
+        'pay_frequency_choices': pay_frequency_choices,
+        'values': request.POST
+    }        
+    return render(request, 'income.html', context)
+
+@csrf_protect
+def update_income(request):
+    if request.method == 'POST':
+        user = request.user
+        user.income_type = request.POST.get('income_type')
+        user.pay_frequency = request.POST.get('pay_frequency')
+        user.amount_after_tax = request.POST.get('amount_after_tax')
+        user.save()
+    return redirect('/profiles/')
+
 
 def referal_letter(request):
     return render(request, 'referal-letter.html')
@@ -71,3 +95,18 @@ def logout_view(request):
     return redirect('/')  
 
 
+# def button_view(request):
+#     # Set the session variable when the button is clicked.
+#     if request.method == 'POST':
+#         request.session['show_image'] = True
+#     ...
+#     return render(request, 'profile.html')
+
+# def image_view(request):
+#     context = {
+#         'show_image': request.session.get('show_image', False)
+#     }
+#     # Make sure to delete the session variable after using it.
+#     if 'show_image' in request.session:
+#         del request.session['show_image']
+#     return render(request, 'profile.html', context)
