@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'Userprofile',
     'Home',
     'register',
+    
+    
 
 ]
 
@@ -161,6 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
+GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
 GDAL_LIBRARY_PATH = '.venv/OSGeo4W/bin/gdal307'
 
 GEOS_LIBRARY_PATH = '.venv/OSGeo4W/bin/geos_c'
