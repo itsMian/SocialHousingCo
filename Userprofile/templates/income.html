@@ -28,7 +28,7 @@
         <p style="white-space: nowrap;">Add all your income sources to help show you can afford the rent.</p>
     </div>
 
-    <form method="POST">
+    <!-- <form method="POST">
         {% csrf_token %}
         <div style="width:400px; margin-left:20%; margin-top: 3%;">
             <h6 class="label">What type of income is it?</h6>
@@ -52,7 +52,54 @@
                 {% else %}
                 <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
                 {% endif %}
-                <input type="submit" class="save-btn" value="Save and back">
+                <button type="submit" class="save-btn" formaction="{% url 'updateincome' %}">Save and back</button>
+            </div>
+        </div>
+    </form> -->
+
+    <form method="POST">
+        {% csrf_token %}
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">What type of income is it?</h6>
+            <select name="income_type" class="form-control">
+                <option selected="true" disabled="disabled">Income Type</option>
+                {% for key,value in income_type_choices.items %}
+                    <option value="{{ key }}" 
+                    {% if key == values.income_type %}
+                        selected
+                    {% endif %}
+                    >{{ value }}</option>
+                {% endfor %}
+            </select>   
+        </div>
+
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">Pay frequency</h6>
+            <select name="pay_frequency" class="form-control">
+                <option selected="true" disabled="disabled">Pay Frequency</option>
+                {% for key,value in pay_frequency_choices.items %}
+                    <option value="{{ key }}" 
+                    {% if key == values.pay_frequency %}
+                        selected
+                    {% endif %}
+                    >{{ value }}</option>
+                {% endfor %}
+            </select>  
+        </div>
+
+        <div style="width:400px; margin-left:20%; margin-top: 3%;">
+            <h6 class="label">Amount (after tax)</h6>
+            <input type="number" id="amount" name="amount" value="{{ user.amount_after_tax }}" step="0.01">
+        </div>
+
+        <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
+            <div class="button-container">
+                {% if user.is_landlord %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'landlord' %}">Cancel</button> 
+                {% else %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
+                {% endif %}
+                <button type="submit" class="save-btn" formaction="{% url 'updateincome' %}">Save and back</button>
             </div>
         </div>
     </form>
