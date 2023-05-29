@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('Database', '0010_alter_property_postcode'),
+        ('Database', '0010_alter_property_postcode_alter_property_price'),
     ]
 
     operations = [
