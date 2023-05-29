@@ -29,24 +29,26 @@
             <p style="white-space: nowrap;">Share with the agent and landlord why you are the best fit for the property.</p>
         </div>
 
-
-        <div style="width:400px; margin-left:20%; margin-top: 3%;">
-            <textarea id="user-introduction" 
-            placeholder="Include details about yourself, any hobbies and why you want this property." 
-            style="width: 150%; height: 200px;"></textarea>
-
-        </div>
-
-
-        
-    
-        <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
-            <div class="button-container">
-                <button class="cancel-btn">Cancel</button> 
-                <button class="save-btn" type="submit">Save and back</button>
-                
+        <form method="POST">
+            {% csrf_token %}
+            <div style="width:400px; margin-left:20%; margin-top: 3%;">
+                <textarea id="aboutme" name="aboutme" 
+                placeholder="Include details about yourself, any hobbies and why you want this property." 
+                style="width: 150%; height: 200px;">{{user.aboutme}}</textarea>
             </div>
-        </div>
+    
+        
+            <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
+                <div class="button-container">
+                    {% if user.is_landlord %}
+                    <button type="submit" class="cancel-btn" formaction="{% url 'landlord' %}">Cancel</button> 
+                    {% else %}
+                    <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
+                    {% endif %}
+                    <button type="submit" class="save-btn" formaction="{% url 'updateaboutme' %}">Save and back</button>
+                </div>
+            </div>
+        </form>
         
      </body>
 

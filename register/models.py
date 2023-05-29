@@ -8,6 +8,12 @@ class User(AbstractUser):
    
     is_renter = models.BooleanField('Is renter', default=False)
     is_landlord = models.BooleanField('Is landlord', default=False)
+
+    dob = models.CharField(max_length=10, default='')
+    phone = models.CharField(max_length=10, default='')
+    aboutme = models.CharField(max_length=2000, default='')
+
+    
     
     
 

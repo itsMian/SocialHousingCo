@@ -1,5 +1,5 @@
 from django.db import models
-from  register.models import User
+from register.models import User
 
 class Profiles(models.Model):
     User_id = models.ForeignKey(User, on_delete=models.CASCADE, default="0")
@@ -27,3 +27,4 @@ class Income(models.Model):
     income_type = models.CharField(max_length=20, choices=INCOME_TYPE_CHOICES, default='salary')
     pay_frequency = models.CharField(max_length=20, choices=PAY_FREQUENCY_CHOICES, default='annually')
     amount_after_tax = models.DecimalField(max_digits=10, decimal_places=2)
+

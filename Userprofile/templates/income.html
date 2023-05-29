@@ -47,7 +47,11 @@
 
         <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
             <div class="button-container">
-                <button class="cancel-btn" onclick="location.href='{% url 'profiles' %}'">Cancel</button>
+                {% if user.is_landlord %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'landlord' %}">Cancel</button> 
+                {% else %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
+                {% endif %}
                 <input type="submit" class="save-btn" value="Save and back">
             </div>
         </div>

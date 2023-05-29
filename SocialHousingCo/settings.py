@@ -163,5 +163,7 @@ SESSION_COOKIE_SECURE = False
 
 GDAL_LIBRARY_PATH = '.venv/OSGeo4W/bin/gdal307'
 
+GEOS_LIBRARY_PATH = '.venv/OSGeo4W/bin/geos_c'
+
 AUTH_USER_MODEL = 'register.User'
 
