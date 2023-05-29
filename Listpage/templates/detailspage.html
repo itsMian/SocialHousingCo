@@ -62,8 +62,6 @@
                     </svg>
                 </a>
             </li>
-
-        
             {%if user.is_renter %}
             <li class="nav-item align-self-center">
               <a class="nav-link link-dark" href="/profiles">
@@ -92,13 +90,6 @@
                 </a>
             </li>
           {%endif%}
-        
-        
-        
-        
-        
-        
-        
         </ul>
     </div>
 
@@ -122,8 +113,7 @@
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
         </svg>Back to results</a>
 
-        
-    {% if user.is_landlord %}
+    {% if user.is_landlord and property.landlord_id == user.id %}
         <a class="mx-3 float-end" href="{% url 'editproperty' property.id %}">Edit</a>
     {% endif %}
 

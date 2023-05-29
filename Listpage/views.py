@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Q
 from Database.models import Property
+from django.contrib.auth.models import User
 from django.http import Http404
 from django.views import View
 from Listpage.choices import price_choices, bedroom_choices, bathroom_choices, parking_choices, sort_choices
@@ -18,11 +19,15 @@ def detailspage(request):
 def createpropertypage(request):
     return render(request, 'createproperty.html')
 
+def mapview(request):
+    return render(request, 'mapview.html')
+
 def listview(request):
     myproperty = Property.objects.all()
     template = loader.get_template('listpage.html')
     context = {
         'mypropertys' : myproperty,
+        'sort_choices': sort_choices,
         'bathroom_choices': bathroom_choices,
         'bedroom_choices': bedroom_choices,
         'parking_choices': parking_choices,
@@ -51,6 +56,7 @@ def storeProperty(request):
     prop.bathroom = request.POST.get('prop_bedroom')
     prop.parking_space = request.POST.get('prop_parking')
     prop.description = request.POST.get('prop_description')
+    prop.landlord = request.user
     prop.save()
     messages.success(request, "Property Added Successfully")
     return redirect('/listpage')
@@ -75,6 +81,7 @@ def updateProperty(request, *args, **kwargs):
     prop.bathroom = request.POST.get('prop_bathroom')
     prop.parking_space = request.POST.get('prop_parking')
     prop.description = request.POST.get('prop_description')
+    prop.landlord = request.user
     prop.save()
     messages.success(request, "Property Update Successfully")
     return redirect('/listpage/')

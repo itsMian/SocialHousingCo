@@ -24,36 +24,46 @@
             <h1 class="personal-title">Personal Details</h1>
         </div>
 
-        <div style="width:400px; margin-left:20%; margin-top: 3%;">
-            <h6 class="label">First Name</h6>
-            <input type="text" id="first-name" placeholder="First name">
-        </div>
-
-        <div style="width:400px; margin-left:20%;margin-top: 3%;">
-            <h6 class="label">Last Name</h6>
-            <input type="text" id="last-name" placeholder="Last name">
-        </div>
-
-        <div style="width:400px; margin-left:20%;margin-top: 3%;">
-            <h6 class="label">Date Of Birth</h6>
-            <input type="date" id="date-of-birth">
-        </div>
-        
-        <div style="width:400px; margin-left:20%;margin-top: 3%;">
-            <h6 class="label">Phone Number(moblie preferred)</h6>
-            <input type="tel" id="phone-number" placeholder="Phone number">
-            <p>Use numbers only, without spaces or other characters, e.g. 0416222333 or 
-                0244443333.</p>
-        </div>
-
+        <form method="POST">
+            {% csrf_token %}
+            <div style="width:400px; margin-left:20%; margin-top: 3%;">
+                <h6 class="label">First Name</h6>
+                <input type="text" id="first-name" name="first-name" value="{{ user.first_name }}" placeholder="First name">
+            </div>
     
+            <div style="width:400px; margin-left:20%;margin-top: 3%;">
+                <h6 class="label">Last Name</h6>
+                <input type="text" id="last-name" name="last-name" value="{{ user.last_name }}" placeholder="Last name">
+            </div>
+    
+            <div style="width:400px; margin-left:20%;margin-top: 3%;">
+                <h6 class="label">Date Of Birth</h6>
+                <input type="date" id="date-of-birth" name="date-of-birth" value="{{ user.dob }}">
+            </div>
+            
+            <div style="width:400px; margin-left:20%;margin-top: 3%;">
+                <h6 class="label">Phone Number(moblie preferred)</h6>
+                <input type="tel" id="phone-number" name="phone-number" value="{{ user.phone }}" placeholder="Phone number" pattern="[0-9]{10}">
+                <p>Use numbers only, without spaces or other characters, e.g. 0416222333 or 
+                    0244443333.</p>
+            </div>
+
         <div style="width:auto; margin-left:17%;margin-top: 4%;">
             <div class="button-container">
-                <button class="cancel-btn">Cancel</button> 
-                <button class="save-btn">Save and back</button>
+                {% if user.is_landlord %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'landlord' %}">Cancel</button> 
+                {% else %}
+                <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
+                {% endif %}
+                <button type="submit" class="save-btn" formaction="{% url 'updatedetails' %}">Save and back</button>
+                <!-- <form method="POST" action="{% url 'button' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="save-btn">Save and back</button>
+                </form> -->
                 
             </div>
         </div>
+        </form>
         
      </body>
 

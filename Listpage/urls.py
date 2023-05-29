@@ -14,5 +14,6 @@ urlpatterns = [
     path("<int:id>/deleteproperty/", views.deleteProperty, name="deleteproperty"),
     path("search/", views.searchProperty, name='searchproperty'),
     path("sort/", views.sortProperty, name='sortproperty'),
+    path("mapview/", views.mapview, name='mapview'),
 ]
 

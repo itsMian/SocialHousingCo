@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'register',
     
     
+
 ]
 
 MIDDLEWARE = [
@@ -89,20 +90,9 @@ WSGI_APPLICATION = 'SocialHousingCo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env('DATABASE_NAME'),
-#         'USER': env('DATABASE_USER'),
-#         'PASSWORD': env('DATABASE_PASS'),
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASS'),
@@ -110,6 +100,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': env('DATABASE_NAME'),
+#         'USER': env('DATABASE_USER'),
+#         'PASSWORD': env('DATABASE_PASS'),
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -163,5 +164,9 @@ CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 
 GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal307'
+GDAL_LIBRARY_PATH = '.venv/OSGeo4W/bin/gdal307'
+
+GEOS_LIBRARY_PATH = '.venv/OSGeo4W/bin/geos_c'
+
 AUTH_USER_MODEL = 'register.User'
 

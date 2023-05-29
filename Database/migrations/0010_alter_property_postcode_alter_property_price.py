@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='property',
             name='postcode',
-            field=models.IntegerField(default=0),
+            field=models.CharField(default='', max_length=4),
         ),
         migrations.AlterField(
             model_name='property',

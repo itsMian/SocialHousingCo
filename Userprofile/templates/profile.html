@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="{% static 'style.css' %}" />
 </head>
     <body>
+        <script src="{% static 'image.js' %}"></script>
         <header class="header">
             <div class="logo-container">
                 <a href="/" class="logo">
@@ -32,6 +33,13 @@
 
             <div class="button-container",div style="width:400px; margin-left:20%;">
                 <a href="{% url 'personal' %}" class="button">Personal details</a>
+                <!-- <a href="{% url 'personal' %}" class="button" onclick="showImage('imageId1')">Personal details
+                    {% if show_image %}
+                        <img id="imageId1" src="{% static 'images/tick.jpg' %}" alt="green tick" style="width:20px; height:20px; display: inline;"/>
+                    {% else %}
+                        <img id="imageId1" src="{% static 'images/tick.jpg' %}" alt="green tick" style="width:20px; height:20px; display: none;"/>
+                    {% endif %}
+                </a> -->
                 <a href="{% url 'aboutme' %}" class="button">About me</a>
                 <a href="{% url 'income' %}" class="button">Income</a>
                 <a href="{% url 'identity' %}"class="button">Identity documents</a>
@@ -46,9 +54,6 @@
                     <a href="{% url 'logout' %}" class="btn btn-danger">Sign Out</a>
                 </div>
   
-
-                
-
      </body>
 
 </html>
