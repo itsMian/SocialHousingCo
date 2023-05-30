@@ -24,25 +24,38 @@
             <h1 class="personal-title">Referal Letter </h1>
         </div>
 
-        <div style="width:400px; margin-left:20%; margin-top: 3%;">
-            <h3 class="label">Upload your Referal Letter</h6>
-            <p style="white-space: nowrap;">Upload your referal letter if you need </p>
-        </div>
-
-
-        <div class="button-container", style="width:600px; margin-left:20%; margin-top: 3%;">
-            <button id="add-photo-id" class="button">Upload your referal letter file</button>           
-            
-        </div>
-        
+        <form method="POST">
+            {% csrf_token %}
+            <div style="width:400px; margin-left:20%; margin-top: 3%;">
+                <h3 class="label">Upload your Referal Letter</h6>
+                <p style="white-space: nowrap;">Upload your referal letter if you need </p>
+            </div>
     
-        <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
-            <div class="button-container">
-                <button class="cancel-btn" onclick="location.href='{% url 'profiles' %}'">Cancel</button>
-                <button class="save-btn">Save and back</button>
+    
+            <div class="button-container", style="width:600px; margin-left:20%; margin-top: 3%;">  
+                <div class="form-group">
+                    <label for="ImageInput" style="width:300px;">Upload your referal letter file</label><br/>
+                    <input type="file" id="referal_letter" name="referal_letter">
+                </div>
+                {% if user.referal_letter %}
+                    {{ user.referal_letter.url }}
+                {% endif %}         
                 
             </div>
-        </div>
+            
+        
+            <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
+                <div class="button-container">
+                    {% if user.is_landlord %}
+                    <button type="submit" class="cancel-btn" formaction="{% url 'land' %}">Cancel</button> 
+                    {% else %}
+                    <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
+                    {% endif %}
+                    <button type="submit" class="save-btn" formaction="{% url 'updatereferalletter' %}">Save and back</button>
+                    
+                </div>
+            </div>
+        </form>
         
      </body>
 

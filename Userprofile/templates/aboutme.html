@@ -41,7 +41,7 @@
             <div style="width:auto; margin-left:17.5%;margin-top: 4%;">
                 <div class="button-container">
                     {% if user.is_landlord %}
-                    <button type="submit" class="cancel-btn" formaction="{% url 'landlord' %}">Cancel</button> 
+                    <button type="submit" class="cancel-btn" formaction="{% url 'land' %}">Cancel</button> 
                     {% else %}
                     <button type="submit" class="cancel-btn" formaction="{% url 'profiles' %}">Cancel</button> 
                     {% endif %}

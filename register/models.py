@@ -17,6 +17,11 @@ class User(AbstractUser):
     pay_frequency = models.CharField(max_length=20, default='')
     amount_after_tax = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
+    photoid = models.FileField(upload_to='userphoto/', blank=True)
+    secondid = models.FileField(upload_to='userphoto/', blank=True)
+
+    referal_letter = models.FileField(upload_to='media/', blank=True)
+
     
     
 
