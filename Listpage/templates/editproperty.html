@@ -225,20 +225,21 @@
             <!-- <button class="btn btn-danger my-3" id="myBtn" data-toggle="modal">Delete</button> -->
 
             <div id="myModal" class="modal">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Delete property</h2>
-                    <span class="close">&times;</span>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Delete property</h2>
+                            <span class="close">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure to delete this property?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger" formaction="{% url 'deleteproperty' property.id%}">Delete</button>
+                        </div>
+                      </div>
                 </div>
-                <div class="modal-body">
-                    Are you sure to delete this property?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger" formaction="{% url 'deleteproperty' property.id%}">Delete</button>
-                </div>
-              </div>
-            
             </div>
         </form>
         

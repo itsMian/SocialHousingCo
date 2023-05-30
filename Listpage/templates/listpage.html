@@ -187,10 +187,6 @@
         </div>
     </div>
 
-
-    <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
-        <div class="text-center d-sm-none"><span>1-25 of 468 results</span></div>
-    </div>
     <div class="container-fluid bg-white border border-bottom py-2">
         <div class="row justify-content-center">
             <div class="col-xs-3 col-sm-2 d-flex justify-content-center">
@@ -204,18 +200,6 @@
                     </svg>Map</a>
             </div>
             <div class="col-sm-5 d-flex justify-content-center d-none d-sm-block align-self-center">All Rental Properties and Real Estate</div>
-            <div class="col-sm-2 d-flex justify-content-center d-none d-sm-block align-self-center">1-25 of 468 results</div>
-            <div class="col-xs-3 col-sm-2 d-flex text-center">
-                <span class="align-self-center px-2">Sort</span>
-                <form method="GET" action="{% url 'sortproperty' %}">
-                    <select name="sort" class="form-control">
-                        <option selected="true" disabled="disabled"></option>
-                        {% for key,value in sort_choices.items %}
-                        <option value="{{ key }}">{{ value }}</option>
-                        {% endfor %}
-                    </select>     
-                </form>
-            </div>
         </div>
     </div>
     

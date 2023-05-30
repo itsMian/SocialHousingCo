@@ -23,7 +23,8 @@ urlpatterns = [
     path("referal-letter/", views.referal_letter, name="referal"),
     path("update-referal-letter/", views.update_referal_letter, name="updatereferalletter"),
 
-     path('logout/', views.logout_view, name='logout'),
+    path('logout/', views.logout_view, name='logout'),
+    path('deleteuser/', views.deleteUser, name='deleteuser'),
 
     #  path('button/', views.button_view, name='button'),
     # path('image/', views.image_view, name='image'),

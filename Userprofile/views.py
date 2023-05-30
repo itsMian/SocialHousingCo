@@ -90,6 +90,10 @@ def logout_view(request):
     logout(request)
     return redirect('/')  
 
+def deleteUser(request):
+    user = request.user
+    user.delete()
+    return redirect('/login/')
 
 # def button_view(request):
 #     # Set the session variable when the button is clicked.
