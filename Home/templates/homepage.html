@@ -2,67 +2,131 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>{% block title %}Home Page {% endblock %}</title>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% load humanize %}
+  <title>{% block title %}Home Page {% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% load humanize %}
+
+  <style>
+      #showcase {
+      background: url(../img/showcase.jpg) no-repeat top center fixed/cover;
+      position: relative;
+      min-height: 850px;
+      color: #fff;
+      padding-top: 6rem; }
+    #showcase .home-search {
+      min-height: 400px;
+      position: relative;
+      border-radius: 5px; }
+    #showcase .overlay {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 400px;
+      width: 100%;
+      background: rgba(51, 51, 51, 0.8); }
+
+    #showcase-inner {
+      background: url(../img/building.jpg) no-repeat top center fixed/cover;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px; }
+      #showcase-inner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 100%;
+        width: 80%;
+        background-color: rgba(128, 216, 255, 0.8); }
+      #showcase-inner.showcase-search {
+        min-height: 270px; }
+
+      @media (max-width: 991px) {
+        #showcase {
+          padding-top: 4rem; }
+          #showcase h1 {
+            font-size: 40px; }
+        .hide-md-down {
+          display: none; } }
+
+      @media (max-width: 768px) {
+        #showcase {
+          padding-top: 3rem; }
+          #showcase h1 {
+            font-size: 40px; }
+          #showcase p {
+            display: none; }
+        #top-bar {
+          text-align: center; }
+          #top-bar .social {
+            text-align: center !important; } }
+
+      @media (max-width: 576px) {
+        #showcase h1 {
+          font-size: 30px; }
+        #showcase-inner h1 {
+          font-size: 40px; } }
+
+  </style>
 </head>
-<body style="background-color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-    <div class="container-fluid p-0">
-        <ul class="nav" style="background-color: #80D8FF;">
-            <li class="nav-item align-self-center d-sm-none">
-                <a class="nav-link link-dark navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
-                </a>
-            </li>
-            <li class="nav-item align-self-center">
-                <a class="nav-link link-dark" href="/">
-                    <img src="{% static 'Listpage/images/logo_new.png' %}" alt="LOGO" width="140" height="40.2">
-                </a>
-            </li>
-            <li class="nav-item align-self-center d-none d-sm-block">
-                <a class="nav-link link-dark" href="/">Home</a>
-            </li>
 
-            {% if user.is_landlord %}
-            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-              <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
-          </li>
-        {% endif %}
-        
-
-
-
-            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="/listpage/">List Page</a>
-            </li>
-            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="#">Features</a>
-            </li>
-            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="#">Support</a>
-            </li>
-            <li class="nav-item align-self-center ms-auto d-none d-sm-block">
-                <a class="nav-link link-dark" href="#">Contact</a>
-            </li>
-            <li class="nav-item align-self-center ms-auto">
-                <a class="nav-link link-dark" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                    </svg>
-                </a>
-            </li>
-
-
-
-          {%if user.is_renter %}
+<body
+  style="background-color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+  <div class="container-fluid p-0">
+    <ul class="nav" style="background-color: #80D8FF;">
+      <li class="nav-item align-self-center d-sm-none">
+        <a class="nav-link link-dark navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item align-self-center">
+        <a class="nav-link link-dark" href="/">
+          <img src="{% static 'Listpage/images/logo_new.png' %}" alt="LOGO" width="140" height="40.2">
+        </a>
+      </li>
+      <li class="nav-item align-self-center d-none d-sm-block">
+        <a class="nav-link link-dark" href="/">Home</a>
+      </li>
+      {% if user.is_landlord %}
+        <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+          <a class="nav-link link-dark" href="/listpage/createproperty/">Create Property</a>
+        </li>
+      {% endif %}
+      <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+        <a class="nav-link link-dark" href="/listpage/">List Page</a>
+      </li>
+      <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+        <a class="nav-link link-dark" href="#">Features</a>
+      </li>
+      <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+        <a class="nav-link link-dark" href="#">Support</a>
+      </li>
+      <li class="nav-item align-self-center ms-auto d-none d-sm-block">
+        <a class="nav-link link-dark" href="#">Contact</a>
+      </li>
+      <li class="nav-item align-self-center ms-auto">
+        <a class="nav-link link-dark" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bell-fill"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+          </svg>
+        </a>
+      </li>
+      {%if user.is_renter %}
             <li class="nav-item align-self-center">
               <a class="nav-link link-dark" href="/profiles">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -90,88 +154,100 @@
                 </a>
             </li>
           {%endif%}
+    </ul>
+  </div>
 
-        </ul>
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-white p-2">
+      <a href="/" class="nav-link link-dark">Home</a>
+      {% if user.is_landlord %}
+      <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
+      {% endif %}
+      <a href="/listpage/" class="nav-link link-dark">List Page</a>
+      <a href="#" class="nav-link link-dark">Features</a>
+      <a href="#" class="nav-link link-dark">Support</a>
+      <a href="#" class="nav-link link-dark">Contact</a>
     </div>
+  </div>
 
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-white p-2">
-            <a href="/" class="nav-link link-dark">Home</a>
-            <a href="/listpage/createproperty/" class="nav-link link-dark">Create Property</a>
-            <a href="/Listpage/" class="nav-link link-dark">List Page</a>
-            <a href="#" class="nav-link link-dark">Features</a>
-            <a href="#" class="nav-link link-dark">Support</a>
-            <a href="#" class="nav-link link-dark">Contact</a>
-        </div>
-    </div>
+  <div style="width: 100%; max-width: 620px; margin: 30px auto; font-weight: bold;">
+    <h1 class="text-center">Welcome To Social Housing Co</h1>
 
-    <div style="width: 100%; max-width: 620px; margin: 0 auto; font-weight: bold;">
-        <h1 class="py-4">Welcome To Social Housing Co</h1>
-        
-    </div>
+  </div>
+<!-- Showcase -->
 
-    <!-- Showcase -->
 <section id="showcase">
-    <div class="container text-center">
-      <div class="home-search p-5">
-        <div class="overlay p-5">
-          <h2 class="display-4 mb-4" >
-            <strong>Quality Price Location</strong> 
-          </h2>
-          <p class="lead"></p>
-          <div class="search">
-            <form action="">
-              <!-- Form Row 1 -->
-              <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">City</label>
-                  <input type="text" name="city" class="form-control" placeholder="City">
-                </div>
-
-                <div class="col-md-4 mb-3">
-                  <label class="sr-only">State</label>
-                  <select name="state" class="form-control">
-                    <option selected="true" disabled="disabled">State (All)</option>
-                    {% for key,value in state_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
+  <div class="container text-center">
+    <div class="home-search p-5">
+      <div class="overlay p-5">
+        <h1 class="display-4 mb-4" >
+          <strong>Quality Price Location</strong> 
+        </h1>
+        <div class="search">
+          <form method="GET">
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Keywords</label>
+                <input type="search" name="keywords" class="rounded" style="width: 300px;" placeholder="Search suburb, postcode or state" />
               </div>
-              <!-- Form Row 2 -->
-              <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label class="sr-only">Bedrooms</label>
-                  <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
-                    {% for key,value in bedroom_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">Max Price (Any)</option>
-                    {% for key,value in price_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Max Price</label>
+                <select name="price" class="form-control">
+                  <option selected="true" disabled="disabled">Max Price (Any)</option>
+                  {% for key,value in price_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
               </div>
-              <button class="btn btn-secondary btn-block mt-4" style="background-color: #80D8FF; color: black;" type="submit">Search</button>
-            </form>
-          </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Max Bedroom</label>
+                <select name="bedroom" class="form-control">
+                  <option selected="true" disabled="disabled">Max Bedroom (Any)</option>
+                  {% for key,value in bedroom_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Max Bathroom</label>
+                <select name="bathroom" class="form-control">
+                  <option selected="true" disabled="disabled">Max Bathroom (Any)</option>
+                  {% for key,value in bathroom_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Max Price</label>
+                <select name="parking" class="form-control">
+                  <option selected="true" disabled="disabled">Max Price (Any)</option>
+                  {% for key,value in parking_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-block mt-4" type="submit" formaction="{% url 'searchproperty' %}">Search</button>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<br>
 
+ <!-- Footer -->
+ <footer id="main-footer" style="background-color: #80D8FF;" class="py-4 text-black text-center">
+  Copyright &copy;
+  <span class="year"></span>  Social Housing Co
+</footer>
 
-    
 </body>
+
 </html>

@@ -111,9 +111,6 @@
             </form>
         </div>
     </div>
-    <div class="container-fluid d-sm-none bg-white border border-bottom py-2">
-        <div class="text-center d-sm-none"><span>1-25 of 468 results</span></div>
-    </div>
     <div class="container-fluid bg-white border border-bottom py-2">
         <div class="row justify-content-center">
             <div class="col-xs-3 col-sm-2 d-flex justify-content-center">
@@ -139,23 +136,6 @@
             {% else %}
             <div class="col-sm-5 d-flex justify-content-center d-none d-sm-block align-self-center">All Rental Properties and Real Estate</div>
             {% endif %}
-            <div class="col-sm-2 d-flex justify-content-center d-none d-sm-block align-self-center">1-25 of 468 results</div>
-            <div class="col-xs-3 col-sm-2 d-flex text-center">
-                <span class="align-self-center px-2">Sort</span>
-                <form method="GET">
-                <span class="dropdown">
-                    <button class="btn btn-white border-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Featured
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item active" href="#">Featured</a></li>
-                        <li><a class="dropdown-item" name="latest" href="{% url 'sortproperty' %}">Latest</a></li>
-                        <li><a class="dropdown-item" name="priceAsc" href="{% url 'sortproperty' %}">Price from low to high</a></li>
-                        <li><a class="dropdown-item" name="priceDesc" href="{% url 'sortproperty' %}">Price from high to low</a></li>
-                    </ul>    
-                </span>
-                </form>
-            </div>
         </div>
     </div>
     
