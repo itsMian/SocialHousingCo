@@ -6,4 +6,5 @@ from django.conf import settings
 
 urlpatterns = [
     path("", views.home, name="HomePage"),
+    path('search/', views.search, name='search'),
 ]
