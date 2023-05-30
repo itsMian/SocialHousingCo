@@ -65,7 +65,7 @@
                 <option selected="true" disabled="disabled">Income Type</option>
                 {% for key,value in income_type_choices.items %}
                     <option value="{{ key }}" 
-                    {% if key == values.income_type %}
+                    {% if key == user.income_type %}
                         selected
                     {% endif %}
                     >{{ value }}</option>
@@ -79,7 +79,7 @@
                 <option selected="true" disabled="disabled">Pay Frequency</option>
                 {% for key,value in pay_frequency_choices.items %}
                     <option value="{{ key }}" 
-                    {% if key == values.pay_frequency %}
+                    {% if key == user.pay_frequency %}
                         selected
                     {% endif %}
                     >{{ value }}</option>
@@ -89,7 +89,7 @@
 
         <div style="width:400px; margin-left:20%; margin-top: 3%;">
             <h6 class="label">Amount (after tax)</h6>
-            <input type="number" id="amount" name="amount" value="{{ user.amount_after_tax }}" step="0.01">
+            <input type="number" id="amount" name="amount" value="{{ user.amount_after_tax }}" step="0.01">{{user.amount_after_tax}} {{user.income_type}} {{user.pay_frequency}}
         </div>
 
         <div style="width:auto; margin-left:17.5%;margin-top: 4%;">

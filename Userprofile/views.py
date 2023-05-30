@@ -1,9 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from .models import Profiles
 from register.models import User
-from .forms import IncomeForm
 from .choices import income_type_choices, pay_frequency_choices
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
@@ -48,25 +46,8 @@ def update_aboutme(request):
     else:
         return redirect('/profiles/')
 
-def income_create(request):
-    if request.method == 'POST':
-        form = IncomeForm(request.POST)
-        if form.is_valid():
-            # Assuming the user is logged in and the Profiles instance is linked to User
-            profile = Profiles.objects.get(user=request.user)
-            income = form.save(commit=False)
-            income.profile = profile
-            income.save()
-            return redirect('profiles')
-    else:
-        form = IncomeForm()
-    return render(request, 'income.html', {'form': form})
-
 def income(request):
     user = request.user
-    user.income_type = request.POST.get('income_type')
-    user.pay_frequency = request.POST.get('pay_frequency')
-    user.amount_after_tax = request.POST.get('amount_after_tax')
     context = {
         'income_type_choices': income_type_choices,
         'pay_frequency_choices': pay_frequency_choices,
@@ -80,15 +61,30 @@ def update_income(request):
         user = request.user
         user.income_type = request.POST.get('income_type')
         user.pay_frequency = request.POST.get('pay_frequency')
-        user.amount_after_tax = request.POST.get('amount_after_tax')
+        user.amount_after_tax = request.POST.get('amount')
         user.save()
     return redirect('/profiles/')
 
+@csrf_protect
+def update_identity(request):
+    user = request.user
+    user.photoid = request.POST.get('photoid')
+    user.secondid = request.POST.get('secondid')
+    user.save()
+    if user.is_landlord:
+        return redirect('/profiles/landlord/')
+    else:
+        return redirect('/profiles/')
 
 def referal_letter(request):
     return render(request, 'referal-letter.html')
 
-
+@csrf_protect
+def update_referal_letter(request):
+    user = request.user
+    user.referal_letter = request.POST.get('referal_letter')
+    user.save()
+    return redirect('/profiles/')
 
 def logout_view(request):
     logout(request)

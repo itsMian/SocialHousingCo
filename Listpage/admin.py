@@ -1,8 +1,8 @@
-from django.contrib.gis import admin
+# from django.contrib.gis import admin
 
-from Listpage.models import Marker
+# from Listpage.models import Marker
 
 
-@admin.register(Marker)
-class MarkerAdmin(admin.GISModelAdmin):
-    list_display = ("name", "location")
+# @admin.register(Marker)
+# class MarkerAdmin(admin.GISModelAdmin):
+#     list_display = ("name", "location")

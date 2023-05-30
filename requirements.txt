@@ -1,2 +1,5 @@
 django~=4.2.0
 psycopg2-binary~=2.9.6
+django-bootstrap5~=23.1
+django-environ~=0.10.0
+djangorestframework~=3.14.0
